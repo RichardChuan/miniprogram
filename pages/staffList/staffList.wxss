@@ -1,0 +1,46 @@
+.flex_box{
+  display:flex;
+}
+.ai{
+  align-items:center;
+}
+.jc{
+  justify-content:center;
+}
+.flex_item{
+  flex:1;
+}
+.list{
+  margin:32rpx;
+  font-size:32rpx;
+}
+.list_item{
+  height:80rpx;
+  border-bottom:1px solid #e6e6e6;
+}
+.list_item:last-child{
+  border-bottom:0;
+}
+.item_cont{
+  margin:0 16rpx;
+}
+.item_btn{
+  padding:0 16rpx;
+  height:48rpx;
+  line-height:48rpx;
+  font-size:28rpx;
+  border-radius:16rpx;
+}
+.btn_yes{
+  border:1px solid #07c160;
+  color:#07c160;
+}
+.btn_no{
+  border:1px solid #ce2424;
+  color:#ce2424;
+}
+.btn_check{
+  background-color:#3b77e3;
+  border:1px solid #3b77e3;
+  color:#fff;
+}

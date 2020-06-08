@@ -1,0 +1,15 @@
+<form class="" bindsubmit="onSubmit">
+  <view class="box">
+    <input type="text" placeholder="账号" name="UserName"></input>
+  </view>
+  <view class="box">
+    <input type="text" placeholder="密码" name="Password" password="{{!isView}}"></input>
+    <view class="viewBtn" bind:tap="onTap">
+      <image wx:if="{{isView}}" src="/images/icon/ico-view.png" mode="aspectFit"></image>
+      <image wx:if="{{!isView}}" src="/images/icon/ico-view-off.png" mode="aspectFit"></image>
+    </view>
+  </view>
+  <view class="box">
+    <button class="btn" hover-class="hoverBtn" form-type="submit" style="width:100%;">登 录</button>
+  </view>
+</form>

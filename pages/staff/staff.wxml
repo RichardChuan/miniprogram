@@ -1,0 +1,9 @@
+<block wx:for="{{listItem}}" wx:key="index">
+  <menu-item 
+  img="{{item.img}}"
+  title="{{item.title}}"
+  note="{{item.note}}"
+  data-type="{{item.type}}"
+  data-attr="{{item.attr}}"
+  bind:onTap="onTap"></menu-item>
+</block>

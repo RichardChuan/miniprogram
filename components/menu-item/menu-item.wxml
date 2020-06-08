@@ -1,0 +1,9 @@
+<view class="box" wx:if="{{img && title}}" bindtap="onTap">
+  <view class="icon">
+    <image class="image" src="{{img}}" mode="scaleToFill"></image>
+  </view>
+  <view class="content">
+    <view class="title ellips">{{title}}</view>
+    <view class="note ellips2">{{note}}</view>
+  </view>
+</view>

@@ -1,0 +1,49 @@
+.ellips,.ellips2{
+   display:-webkit-box;
+   overflow:hidden;
+   text-overflow:ellipsis;
+   word-wrap:break-word;
+   white-space:normal !important;
+   -webkit-box-orient:vertical;
+}
+.ellips{
+   -webkit-line-clamp:1;
+}
+.ellips2{
+   -webkit-line-clamp:2;
+}
+
+.box{
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   margin:32rpx;
+   padding:32rpx;
+   border-radius:24rpx;
+   box-shadow:0rpx 2rpx 30rpx 0rpx rgba(0, 0, 0, 0.1);
+}
+.icon{
+   width:140rpx;
+   height:140rpx;
+   overflow:hidden;
+}
+.icon .image{
+   width:100%;
+   height:100%;
+}
+.content{
+   flex:1;
+   margin-left:16rpx;
+}
+.title{
+   line-height:48rpx;
+   font-size:40rpx;
+   color:#333;
+}
+.note{
+   height:56rpx;
+   margin-top:10rpx;
+   line-height:28rpx;
+   font-size:24rpx;
+   color:#858585;
+}

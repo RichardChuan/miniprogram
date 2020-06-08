@@ -1,0 +1,7 @@
+<view class="list">
+  <view class="list_item flex_box ai" wx:for="{{list}}" wx:key="index">
+    <view class="item_btn {{item.IsCompletion?'btn_yes':'btn_no'}}">{{item.IsCompletion?'信息完整':'信息不全'}}</view>
+    <view class="item_cont flex_item">{{item.Name}}</view>
+    <view class="item_btn btn_check" bind:tap="onTap" data-index="{{index}}">查看</view>
+  </view>
+</view>

@@ -1,0 +1,35 @@
+.mar32{
+   margin:32rpx;
+}
+.pad32{
+   padding:32rpx;
+}
+
+.bd_radius{
+   overflow:hidden;
+   border-radius:24rpx;
+}
+.bd_circle{
+   overflow:hidden;
+   border-radius:50%;
+}
+
+.ellips,.ellips2,.ellips3{
+   display:box;
+   box-orient:vertical;
+   overflow:hidden;
+}
+.ellips{
+   line-clamp:1;
+}
+.ellips2{
+   line-clamp:2;
+}
+.ellips3{
+   line-clamp:3;
+}
+
+
+.footer_nav{
+   color:#FF4858;
+}

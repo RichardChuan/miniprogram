@@ -1,0 +1,180 @@
+<view class="list">
+  <view class="list_item flex_box">
+    <view class="item_title">姓名：</view>
+    <view class="item_content flex_item">
+      <input
+        type="text"
+        value="{{Name}}"
+        bindinput="onChange"
+        data-target="Name"
+        placeholder="请输入姓名"
+        disabled="{{IsDisabled}}"
+      ></input>
+    </view>
+  </view>
+  <view class="list_item flex_box">
+    <view class="item_title">性别：</view>
+    <view class="item_content flex_item">
+      <radio-group
+        bindchange="onChange"
+        data-target="Sex"
+      >
+        <radio
+          class="radio"
+          value="M"
+          color="#3b77e3"
+          checked="{{Sex=='M'?true:false}}"
+          disabled="{{IsDisabled}}"
+        >男</radio>
+        <radio
+          class="radio"
+          value="F"
+          color="#3b77e3"
+          checked="{{Sex=='F'?true:false}}"
+          disabled="{{IsDisabled}}"
+        >女</radio>
+      </radio-group>
+    </view>
+  </view>
+  <view class="list_item flex_box">
+    <view class="item_title">民族：</view>
+    <view class="item_content flex_item">
+      <picker
+        value="{{NationIndex}}"
+        bindchange="onChange"
+        data-target="NationIndex"
+        range="{{NationArr}}"
+        range-key="DictName"
+        disabled="{{IsDisabled}}"
+      >
+        <view>{{NationArr[NationIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="list_item">
+    <view class="item_title">证件类型：</view>
+    <view class="item_content flex_item">
+      <picker
+        value="{{CardIndex}}"
+        bindchange="onChange"
+        data-target="CardIndex"
+        range="{{CardArr}}"
+        range-key="DictName"
+        disabled="{{IsDisabled}}"
+      >
+        <view>{{CardArr[CardIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="list_item">
+    <view class="item_title">证件号码：</view>
+    <view class="item_content">
+      <input
+        type="number"
+        value="{{CardCode}}"
+        bindinput="onChange"
+        data-target="id"
+        placeholder="请输入身份证号码"
+        disabled="{{IsDisabled}}"
+      ></input>
+    </view>
+  </view>
+    <view class="list_item">
+    <view class="item_title">户口所在地：</view>
+    <view class="item_content">
+      <textarea
+        value="{{Address}}"
+        bindinput="onChange"
+        data-target="Address"
+        placeholder="请输入户口所在地"
+        disabled="{{IsDisabled}}"
+      ></textarea>
+    </view>
+  </view>
+
+  <block wx:if="{{IsConfirm}}">
+    <view class="list_item flex_box">
+      <view class="item_title">手机号：</view>
+      <view class="item_content flex_item">
+        <input
+          type="number"
+          value="{{Phone}}"
+          bindinput="onChange"
+          data-target="Phone"
+          placeholder="请输入手机号"
+        ></input>
+      </view>
+    </view>
+    <view class="list_item flex_box">
+      <view class="item_title">工种：</view>
+      <view class="item_content flex_item">
+        <picker
+          value="{{WorkIndex}}"
+          bindchange="onChange"
+          data-target="WorkIndex"
+          range="{{WorkArr}}"
+          range-key="DictName"
+        >
+          <view>{{WorkArr[WorkIndex].DictName}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="list_item flex_box">
+      <view class="item_title">是否参加培训：</view>
+      <view class="item_content flex_item">
+        <radio-group
+          bindchange="onChange"
+          data-target="IsSafetyTraining"
+        >
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="true"
+            checked="{{IsSafetyTraining?true:false}}"
+          >是</radio>
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="false"
+            checked="{{!IsSafetyTraining?true:false}}"
+          >否</radio>
+        </radio-group>
+      </view>
+    </view>
+    <view class="list_item flex_box">
+      <view class="item_title">是否持证上岗：</view>
+      <view class="item_content flex_item">
+        <radio-group 
+          bindchange="onChange" 
+          data-target="IsRecord"
+        >
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="true"
+            checked="{{IsRecord?true:false}}"
+          >是</radio>
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="false"
+            checked="{{!IsRecord?true:false}}"
+          >否</radio>
+        </radio-group>
+      </view>
+    </view>
+  </block>
+</view>
+<view class="fixed flex_box ai jc" wx:if="{{IsConfirm}}">
+  <view class="flex_item">
+    <view class="btn btn_add" bind:tap="add">{{IsUpdate?'更新':'添加'}}</view>
+  </view>
+</view>
+<view class="fixed flex_box ai jc" wx:else>
+  <view class="flex_item">
+    <view class="btn btn_modify" bind:tap="onModify">修改</view>
+  </view>
+  <view class="flex_item">
+    <view class="btn btn_confirm" bind:tap="onConfirm">确认</view>
+  </view>
+</view>

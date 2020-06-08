@@ -1,0 +1,7 @@
+<view class="list">
+  <view class="list_item" wx:for="{{list}}" wx:key="id">
+    <view class="item_left">{{item.name}}</view>
+    <view class="item_right">{{valueList[item.key]}}</view>
+  </view>
+  <button class="btn" hover-class="hoverBtn" bind:tap="onTap" style="width:100%;">退出登录</button>
+</view>

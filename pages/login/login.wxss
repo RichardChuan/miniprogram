@@ -1,0 +1,44 @@
+.box{
+  display:-webkit-flex;
+  display:flex;
+  overflow:hidden;
+  margin:32rpx;
+  border-radius:24rpx;
+  box-shadow:0rpx 2rpx 30rpx 0rpx rgba(0,0,0,0.1);
+}
+.box input{
+  flex:1;
+  height:96rpx;
+  line-height:96rpx;
+  padding:0 32rpx;
+  font-size:28rpx;
+}
+.viewBtn{
+  display:-webkit-flex;
+  display:flex;
+  -webkit-align-items:center;
+  align-items:center;
+  -webkit-justify-content:center;
+  justify-content:center;
+  width:96rpx;
+  height:96rpx;
+}
+.viewBtn image{
+  width:42rpx;
+  height:42rpx;
+}
+
+.btn{
+  box-sizing:border-box;
+  height:96rpx;
+  line-height:96rpx;
+  padding:0;
+  font-size:36rpx;
+  text-align:center;
+  color:#fff;
+  background-color:#3b77e3;
+}
+.hoverBtn{
+  color:#fff;
+  background-color:#336adf;
+}
