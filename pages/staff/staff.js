@@ -3,6 +3,10 @@ let utils = require('../../utils/utils')
 
 Page({
   data:{
+    tips:{
+      type:'',
+      msg:''
+    },
     listItem:[
       {
         img:'/images/icon/ico-scan.png',
@@ -54,28 +58,21 @@ Page({
     let attr = e.currentTarget.dataset.attr;
     switch(type){
       case 'toast':
-        this.onToast();
+        utils.toast({
+          title:'功能开发中'
+        })
         break;
       case 'route':
-        this.onRoute(attr);
+        wx.navigateTo({
+          url:attr
+        })
         break;
       case 'event':
-        this.onEvent(attr);
+        this.getEvent(attr);
     }
   },
-  onToast(){
-    wx.showToast({
-      title:'功能开发中',
-      icon:'none',
-      mask:true
-    })
-  },
-  onRoute(routes){
-    wx.navigateTo({
-      url:routes
-    })
-  },
-  onEvent(event){
+  getEvent(event){
+    let _this = this;
     wx.chooseImage({
       count:1,
       success(res){
@@ -84,51 +81,38 @@ Page({
             title:'信息识别中',
             mask:true
           });
-          wx.serviceMarket.invokeService({
-            service:'wx79ac3de8be320b71',
-            api:'OcrAllInOne',
-            data:{
-              img_url:new wx.serviceMarket.CDN({
-                type:'filePath',
-                filePath:res.tempFilePaths[0],
-              }),
-              data_type:3,
-              ocr_type:1
-            },
-          }).then(function(res){
-            let idCard_res = res.data.idcard_res;
-            let type = idCard_res.type;
+          app.getOcr({
+            filePath:res.tempFilePaths[0],
+            ocrType:1 // 1为身份证
+          })
+          .then(function(res){
+            let idCardRes = res.data.idcard_res;
+            let type = idCardRes.type;
+            let idCard = JSON.stringify(idCardRes);
+            console.log(idCard);
             if(type == 0){
-              let idCard = {
-                Name:idCard_res.name.text,
-                Sex:idCard_res.gender.text=='男'?'M':'F',
-                NationText:idCard_res.nationality.text,
-                CardCode:idCard_res.id.text,
-                Address:idCard_res.address.text,
-                isOcr:true
-              }
-              let idCardJson = JSON.stringify(idCard);
               wx.navigateTo({
-                url:'/pages/staffAdd/staffAdd?idCardJson='+idCardJson
-              });
+                url:'/pages/staffAdd/staffAdd?idCard='+idCard
+              })
             }else{
               wx.hideLoading();
-              wx.showModal({
-                title:'提示',
-                content:'信息识别失败，请重新提交',
+              _this.setData({
+                tips:{
+                  type:'error',
+                  msg:'信息识别失败，请重新识别'
+                }
               })
             }
           }).catch(function(){
             wx.hideLoading();
-            wx.showModal({
-              title:'提示',
-              content:'信息识别失败，请重新提交',
+            _this.setData({
+              tips:{
+                type:'error',
+                msg:'信息识别失败，请重新识别'
+              }
             })
           })
         }
-      },
-      fail(err){
-        console.log(err);
       }
     })
   }

@@ -1,0 +1,72 @@
+  <block wx:if="{{IsConfirm}}">
+    <view class="list_item flex_box">
+      <view class="item_title">手机号：</view>
+      <view class="item_content flex_item">
+        <input
+          type="number"
+          value="{{Phone}}"
+          bindinput="onChange"
+          data-target="Phone"
+          placeholder="请输入手机号"
+        ></input>
+      </view>
+    </view>
+    <view class="list_item flex_box">
+      <view class="item_title">工种：</view>
+      <view class="item_content flex_item">
+        <picker
+          value="{{WorkIndex}}"
+          bindchange="onChange"
+          data-target="WorkIndex"
+          range="{{WorkArr}}"
+          range-key="DictName"
+        >
+          <view>{{WorkArr[WorkIndex].DictName}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="list_item flex_box">
+      <view class="item_title">是否参加培训：</view>
+      <view class="item_content flex_item">
+        <radio-group
+          bindchange="onChange"
+          data-target="IsSafetyTraining"
+        >
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="true"
+            checked="{{IsSafetyTraining?true:false}}"
+          >是</radio>
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="false"
+            checked="{{!IsSafetyTraining?true:false}}"
+          >否</radio>
+        </radio-group>
+      </view>
+    </view>
+    <view class="list_item flex_box">
+      <view class="item_title">是否持证上岗：</view>
+      <view class="item_content flex_item">
+        <radio-group 
+          bindchange="onChange" 
+          data-target="IsRecord"
+        >
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="true"
+            checked="{{IsRecord?true:false}}"
+          >是</radio>
+          <radio
+            class="radio"
+            color="#3b77e3"
+            value="false"
+            checked="{{!IsRecord?true:false}}"
+          >否</radio>
+        </radio-group>
+      </view>
+    </view>
+  </block>

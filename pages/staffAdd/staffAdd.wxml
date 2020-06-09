@@ -1,6 +1,6 @@
 <view class="list">
-  <view class="list_item flex_box">
-    <view class="item_title">姓名：</view>
+  <view class="list_item flex">
+    <view class="item_title">姓　　名：</view>
     <view class="item_content flex_item">
       <input
         type="text"
@@ -12,8 +12,8 @@
       ></input>
     </view>
   </view>
-  <view class="list_item flex_box">
-    <view class="item_title">性别：</view>
+  <view class="list_item flex">
+    <view class="item_title">性　　别：</view>
     <view class="item_content flex_item">
       <radio-group
         bindchange="onChange"
@@ -36,8 +36,8 @@
       </radio-group>
     </view>
   </view>
-  <view class="list_item flex_box">
-    <view class="item_title">民族：</view>
+  <view class="list_item flex">
+    <view class="item_title">民　　族：</view>
     <view class="item_content flex_item">
       <picker
         value="{{NationIndex}}"
@@ -51,7 +51,7 @@
       </picker>
     </view>
   </view>
-  <view class="list_item">
+  <view class="list_item flex">
     <view class="item_title">证件类型：</view>
     <view class="item_content flex_item">
       <picker
@@ -66,15 +66,15 @@
       </picker>
     </view>
   </view>
-  <view class="list_item">
+  <view class="list_item flex">
     <view class="item_title">证件号码：</view>
-    <view class="item_content">
+    <view class="item_content flex_item">
       <input
         type="number"
         value="{{CardCode}}"
         bindinput="onChange"
         data-target="id"
-        placeholder="请输入身份证号码"
+        placeholder="请输入证件号码"
         disabled="{{IsDisabled}}"
       ></input>
     </view>
@@ -91,90 +91,12 @@
       ></textarea>
     </view>
   </view>
-
-  <block wx:if="{{IsConfirm}}">
-    <view class="list_item flex_box">
-      <view class="item_title">手机号：</view>
-      <view class="item_content flex_item">
-        <input
-          type="number"
-          value="{{Phone}}"
-          bindinput="onChange"
-          data-target="Phone"
-          placeholder="请输入手机号"
-        ></input>
-      </view>
-    </view>
-    <view class="list_item flex_box">
-      <view class="item_title">工种：</view>
-      <view class="item_content flex_item">
-        <picker
-          value="{{WorkIndex}}"
-          bindchange="onChange"
-          data-target="WorkIndex"
-          range="{{WorkArr}}"
-          range-key="DictName"
-        >
-          <view>{{WorkArr[WorkIndex].DictName}}</view>
-        </picker>
-      </view>
-    </view>
-    <view class="list_item flex_box">
-      <view class="item_title">是否参加培训：</view>
-      <view class="item_content flex_item">
-        <radio-group
-          bindchange="onChange"
-          data-target="IsSafetyTraining"
-        >
-          <radio
-            class="radio"
-            color="#3b77e3"
-            value="true"
-            checked="{{IsSafetyTraining?true:false}}"
-          >是</radio>
-          <radio
-            class="radio"
-            color="#3b77e3"
-            value="false"
-            checked="{{!IsSafetyTraining?true:false}}"
-          >否</radio>
-        </radio-group>
-      </view>
-    </view>
-    <view class="list_item flex_box">
-      <view class="item_title">是否持证上岗：</view>
-      <view class="item_content flex_item">
-        <radio-group 
-          bindchange="onChange" 
-          data-target="IsRecord"
-        >
-          <radio
-            class="radio"
-            color="#3b77e3"
-            value="true"
-            checked="{{IsRecord?true:false}}"
-          >是</radio>
-          <radio
-            class="radio"
-            color="#3b77e3"
-            value="false"
-            checked="{{!IsRecord?true:false}}"
-          >否</radio>
-        </radio-group>
-      </view>
-    </view>
-  </block>
 </view>
-<view class="fixed flex_box ai jc" wx:if="{{IsConfirm}}">
-  <view class="flex_item">
-    <view class="btn btn_add" bind:tap="add">{{IsUpdate?'更新':'添加'}}</view>
-  </view>
-</view>
-<view class="fixed flex_box ai jc" wx:else>
-  <view class="flex_item">
+<view class="fixed flex ai jc">
+  <view class="flex_item" wx:if="{{IsDisabled}}">
     <view class="btn btn_modify" bind:tap="onModify">修改</view>
   </view>
   <view class="flex_item">
-    <view class="btn btn_confirm" bind:tap="onConfirm">确认</view>
+    <view class="btn btn_add" bind:tap="onAdd">添加</view>
   </view>
 </view>

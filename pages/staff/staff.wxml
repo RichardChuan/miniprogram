@@ -7,3 +7,6 @@
   data-attr="{{item.attr}}"
   bind:onTap="onTap"></menu-item>
 </block>
+
+
+<top-tips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></top-tips>

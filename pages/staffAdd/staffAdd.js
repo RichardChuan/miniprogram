@@ -1,91 +1,54 @@
 let utils = require('../../utils/utils');
-let idCard;
 let oper = '';
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
-    // 是否确认
-    IsConfirm:false,
     // 是否可用
     IsDisabled:false,
-    // 是否更新
-    IsUpdate:false,
-
-    Id : '',
     // 姓名
     Name : '',
     // 性别
     Sex : 'M',
     // 住址
     Address : '',
-
     // 身份证号
     CardCode : '',
     // 证件类型字典
     CardArr:[],
     // 证件类型默认选项索引
     CardIndex:0,
-
     // 民族字典
     NationArr:[],
     // 民族默认选项索引
     NationIndex:12,
-
-    // 工种字典
-    WorkArr:[],
-    // 工种默认选项索引
-    WorkIndex:10,
-
-    // 手机号
-    Phone : '',
-
-    // 是否培训
-    IsSafetyTraining : false,
-    // 是否备案
-    IsRecord : false,
   },
   onLoad(options){
     let _this = this;
-    oper = options.operation;
-    _this.onGetArr('NationArr');
-    _this.onGetArr('CardArr');
-    _this.onGetArr('WorkArr');
-    if(options.idCardJson){
-      idCard = JSON.parse(options.idCardJson);
+    console.log(options);
+    let keyArr = Object.keys(options);
+    console.log(options);
+    _this.getArr('NationArr');
+    _this.getArr('CardArr');
+    if(keyArr.length != 0){
+      console.log(options.idCard);
+      let idCard = JSON.parse(options.idCard);
+      console.log(idCard);
       _this.setData({
-        Id:idCard.Id,
-        Name:idCard.Name,
-        Sex:idCard.Sex,
-        Address:idCard.Address,
-        CardCode:idCard.CardCode,
-        Phone:idCard.hasOwnProperty('Phone')?idCard.Phone:'',
-        IsSafetyTraining:idCard.hasOwnProperty('IsSafetyTraining')?idCard.IsSafetyTraining:false,
-        IsRecord:idCard.hasOwnProperty('IsRecord')?idCard.IsRecord:false,
-        IsDisabled:true
-      })
-      if(oper =='update'){
-        _this.setData({
-          IsUpdate:true,
-          IsConfirm:true
-        })
-      }
-    }else{
-      _this.setData({
-        IsConfirm:true
+        Name:idCard.name.text,
+        Sex:idCard.gender.text,
+        Address:idCard.address.text,
+        CardCode:idCard.id.text,
       })
     }
   },
-  onReady(){
-    if(idCard){
-      this.onMapArr(idCard,'NationText',this.data.NationArr,'NationIndex');
-      this.onMapArr(idCard,'CardText',this.data.CardArr,'CardIndex');
-      this.onMapArr(idCard,'WorkText',this.data.WorkArr,'WorkIndex');
-    }
-  },
+  // onReady(){
+  //   if(idCard){
+  //     this.getMapArr(idCard,'NationText',this.data.NationArr,'NationIndex');
+  //     this.getMapArr(idCard,'CardText',this.data.CardArr,'CardIndex');
+  //     this.getMapArr(idCard,'WorkText',this.data.WorkArr,'WorkIndex');
+  //   }
+  // },
   // 获取滚动选择器数据
-  onGetArr(key){
+  getArr(key){
     let _this = this;
     if(_this.data[key].length == 0){
       utils.storage.Get(key,true)
@@ -96,7 +59,7 @@ Page({
       })
     }
   },
-  onMapArr(obj,key,array,vari){
+  getMapArr(obj,key,array,vari){
     let _this = this;
     if(obj.hasOwnProperty(key)){
       array.map(function(e,i){
@@ -116,19 +79,13 @@ Page({
       [target]:value
     })
   },
-  onConfirm(){
-    this.setData({
-      IsConfirm:true,
-      IsDisabled:true
-    })
-  },
-  onModify(){
+  onEdit(){
     this.setData({
       IsDisabled:false
     })
   },
   // 添加数据
-  add(){
+  onAdd(){
     let _this = this;
     let data = {
       Id:this.data.Id,
