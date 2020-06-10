@@ -24,18 +24,13 @@ Page({
   },
   onLoad(options){
     let _this = this;
+    console.log(app.globalData)
     _this.setData({
       CardType:app.globalData.CardType,
       NationType:app.globalData.NationType
     })
-    console.log(options);
-    let keyType = Object.keys(options);
-    console.log(keyType);
-
-    if(keyType.length != 0){
-      console.log(options.idCard);
+    if(options.idCard != undefined){
       let idCard = JSON.parse(options.idCard);
-      console.log(idCard);
       _this.setData({
         Name:idCard.name.text,
         Sex:idCard.gender.text=='男'?'M':'F',
@@ -45,13 +40,20 @@ Page({
       })
     }
   },
-  // onReady(){
-  //   if(idCard){
-  //     this.getMapType(idCard,'NationText',this.data.NationType,'NationIndex');
-  //     this.getMapType(idCard,'CardText',this.data.CardType,'CardIndex');
-  //     this.getMapType(idCard,'WorkText',this.data.WorkType,'WorkIndex');
-  //   }
-  // },
+  onReady(){
+    app.onInitData({
+      key:'CardType',
+      url:'/api/app/dictItem/cardType'
+    })
+    app.onInitData({
+      key:'NationType',
+      url:'/api/app/dictItem/nationType'
+    })
+    app.onInitData({
+      key:'WorkType',
+      url:'/api/app/dictItem/workType'
+    })
+  },
   getMapType(obj,key,Typeay,vari){
     let _this = this;
     if(obj.hasOwnProperty(key)){
@@ -96,7 +98,7 @@ Page({
       IsRecord:this.data.IsRecord
     }
     if(data.Name && data.Sex && data.CardCode && data.Address &&data.Phone){
-      _this.onAdd(data);
+      _this.submitData(data);
     }else{
       if(!data.Name || !data.Sex || !data.CardCode || !data.Address){
         wx.showToast({
@@ -114,14 +116,14 @@ Page({
           confirmColor: '#666',
           success:(result) => {
             if(result.confirm){
-              _this.onAdd(data);
+              _this.submitData(data);
             }
           }
         });
       }
     }
   },
-  onAdd(data){
+  submitData(data){
     let methods,titles,contents;
     if(oper=='update'){
       methods = 'put';

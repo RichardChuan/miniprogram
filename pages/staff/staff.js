@@ -32,23 +32,10 @@ Page({
         img:'/images/icon/ico-record.png',
         title:'身份证备案',
         note:'拍照前请确认身份证清晰',
-        type:'toast',
+        type:'event',
+        attr:'uploadImg'
       }
     ],
-  },
-  onReady(){
-    app.onInitData({
-      key:'CardType',
-      url:'/api/app/dictItem/cardType'
-    })
-    app.onInitData({
-      key:'NationType',
-      url:'/api/app/dictItem/nationType'
-    })
-    app.onInitData({
-      key:'WorkType',
-      url:'/api/app/dictItem/workType'
-    })
   },
   onTap(e){
     let type = e.currentTarget.dataset.type;
@@ -73,8 +60,13 @@ Page({
     wx.chooseImage({
       count:1,
       success(res){
-        if(event == 'ocr'){
-          _this.getOcrInfo(res);
+        switch(event){
+          case 'ocr':
+            _this.getOcrInfo(res);
+            break;
+          case 'uploadImg':
+            _this.getUploadImg(res);
+            break;
         }
       }
     })
@@ -115,5 +107,30 @@ Page({
         }
       })
     })
+  },
+  getUploadImg(res){
+    // let imgSrc = res.tempFilePaths[0];
+    // let Authorization = wx.getStorageSync('Authorization');
+    // let icmtenant = wx.getStorageSync('icmtenant');
+    // console.log(Authorization);
+    // wx.uploadFile({
+    //   url: 'https://www.yumeilinjianzhu.net.cn/apitest/apitest/api/uploadfile',
+    //   filePath:imgSrc,
+    //   name:'file',
+    //   formData:{
+    //     'files': imgSrc
+    //   },
+    //   header: {
+    //     "Content-Type": "multipart/form-data",
+    //     Authorization,
+    //     icmtenant
+    //   },
+    //   success(result){
+    //     console.log(result);
+    //   },
+    //   fail(err){
+    //     console.log(err);
+    //   }
+    // })
   }
 })
