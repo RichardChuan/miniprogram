@@ -14,7 +14,7 @@ Component({
     }
   },
    methods: {
-    onTap: function(){
+    onTap(){
       this.triggerEvent('onTap');
     },
   }

@@ -1,6 +1,5 @@
 const app = getApp();
-let utils = require('../../utils/utils')
-
+const utils = require('../../utils/utils');
 Page({
   data:{
     tips:{
@@ -37,21 +36,19 @@ Page({
       }
     ],
   },
-  onShow(){
-    this.onSetArr('NationArr','/api/app/dictItem/nationType')
-    this.onSetArr('CardArr','/api/app/dictItem/cardType')
-    this.onSetArr('WorkArr','/api/app/dictItem/workType')
-  },
-  onSetArr(key,url){
-    let array = wx.getStorageSync(key) || [];
-    if(array.length == 0){
-      utils.request({
-        url
-      })
-      .then(function(res){
-        wx.setStorageSync(key,res);
-      })
-    }
+  onReady(){
+    app.onInitData({
+      key:'CardType',
+      url:'/api/app/dictItem/cardType'
+    })
+    app.onInitData({
+      key:'NationType',
+      url:'/api/app/dictItem/nationType'
+    })
+    app.onInitData({
+      key:'WorkType',
+      url:'/api/app/dictItem/workType'
+    })
   },
   onTap(e){
     let type = e.currentTarget.dataset.type;
@@ -77,43 +74,46 @@ Page({
       count:1,
       success(res){
         if(event == 'ocr'){
-          wx.showLoading({
-            title:'信息识别中',
-            mask:true
-          });
-          app.getOcr({
-            filePath:res.tempFilePaths[0],
-            ocrType:1 // 1为身份证
-          })
-          .then(function(res){
-            let idCardRes = res.data.idcard_res;
-            let type = idCardRes.type;
-            let idCard = JSON.stringify(idCardRes);
-            console.log(idCard);
-            if(type == 0){
-              wx.navigateTo({
-                url:'/pages/staffAdd/staffAdd?idCard='+idCard
-              })
-            }else{
-              wx.hideLoading();
-              _this.setData({
-                tips:{
-                  type:'error',
-                  msg:'信息识别失败，请重新识别'
-                }
-              })
-            }
-          }).catch(function(){
-            wx.hideLoading();
-            _this.setData({
-              tips:{
-                type:'error',
-                msg:'信息识别失败，请重新识别'
-              }
-            })
-          })
+          _this.getOcrInfo(res);
         }
       }
+    })
+  },
+  getOcrInfo(res){
+    wx.showLoading({
+      title:'信息识别中',
+      mask:true
+    });
+    app.onOcr({
+      filePath:res.tempFilePaths[0],
+      ocrType:1 // 1为身份证
+    })
+    .then((res)=>{
+      let idCardRes = res.data.idcard_res;
+      let type = idCardRes.type;
+      let idCard = JSON.stringify(idCardRes);
+      wx.hideLoading();
+      if(type == 0){
+        wx.navigateTo({
+          url:'/pages/staffAdd/staffAdd?idCard='+idCard
+        })
+      }else{
+        _this.setData({
+          tips:{
+            type:'error',
+            msg:'信息识别失败，请重新识别'
+          }
+        })
+      }
+    })
+    .catch(()=>{
+      wx.hideLoading();
+      _this.setData({
+        tips:{
+          type:'error',
+          msg:'信息识别失败，请重新识别'
+        }
+      })
     })
   }
 })

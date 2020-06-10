@@ -1,4 +1,5 @@
-let utils = require('../../utils/utils');
+const app = getApp();
+const utils = require('../../utils/utils');
 Page({
   data:{
     list:[
@@ -32,7 +33,7 @@ Page({
       url:'/api/app/account/userInfo',
       method:'get'
     })
-    .then(function(res){
+    .then((res)=>{
       let valueList = res;
       for (const key in res) {
         if(res[key] instanceof Array){

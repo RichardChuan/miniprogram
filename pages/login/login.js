@@ -1,4 +1,5 @@
-const utils = require('../../utils/utils.js');
+const app = getApp();
+const utils = require('../../utils/utils');
 Page({
   data:{
     isView:false,
@@ -24,7 +25,7 @@ Page({
       method:'post',
       data:e.detail.value,
     },false)
-    .then(function(res){
+    .then((res)=>{
       let Authorization = res.token_type + ' ' + res.access_token;
       let icmtenant = res.tenant_id;
       wx.setStorageSync('UserName',e.detail.value.UserName);
@@ -40,7 +41,7 @@ Page({
         url: '/pages/index/index'
       });
     })
-    .catch(function(err){
+    .catch((err)=>{
       wx.showToast({
         title:err.msg,
         icon: 'none',

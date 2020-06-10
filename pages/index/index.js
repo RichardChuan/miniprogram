@@ -1,7 +1,5 @@
-//index.js
 const app = getApp();
-const utils = require('../../utils/utils.js');
-
+const utils = require('../../utils/utils');
 Page({
   data:{
     listItem:[
@@ -47,7 +45,8 @@ Page({
         })
         break;
       case 'event':
-        this.onEvent(attr);
+        this.getEvent(attr);
+        break;
     }
   }
 })

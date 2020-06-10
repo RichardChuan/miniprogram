@@ -1,9 +1,12 @@
 const utils = require('./utils/utils.js');
 App({
-  data:{
-    workType:[],
-    nationType:[],
-    cardType:[]
+  globalData:{
+    // 证件类型字典
+    CardType:[],
+    // 民族字典
+    NationType:[],
+    // 工种字典
+    WorkType:[]
   },
   onLaunch(){
     utils.storage.Get('Authorization',true)
@@ -18,7 +21,26 @@ App({
       });
     })
   },
-  getOcr(options){
+
+  onInitData(options){
+    let _this = this;
+    utils.storage.Get(options.key)
+    .then((res)=>{
+      _this.globalData[options.key] = res;
+    })
+    .catch(()=>{
+      utils.request({
+        url:options.url
+      })
+      .then((res)=>{
+        utils.storage.Set(options.key,res)
+        .then(()=>{
+          _this.globalData[options.key] = res;
+        })
+      })
+    })
+  },
+  onOcr(options){
     return wx.serviceMarket.invokeService({
       service:'wx79ac3de8be320b71',
       api:'OcrAllInOne',

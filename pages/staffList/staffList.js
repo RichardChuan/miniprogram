@@ -1,4 +1,5 @@
-let utils = require('../../utils/utils');
+const app = getApp();
+const utils = require('../../utils/utils');
 let list = [];
 let begin = 0;  // 起点
 let num = 10;    // 请求数量
@@ -58,14 +59,14 @@ Page({
       },
       method:'post'
     })
-    .then(function(res){
+    .then((res)=>{
       len = res.Items.length;
       begin += len;
       list = list.concat(res.Items);
       wx.hideLoading();
       _this.getArrMap(list);
     })
-    .catch(function(err){
+    .catch((err)=>{
       wx.hideLoading();
     })
   },

@@ -43,11 +43,11 @@
         value="{{NationIndex}}"
         bindchange="onChange"
         data-target="NationIndex"
-        range="{{NationArr}}"
+        range="{{NationType}}"
         range-key="DictName"
         disabled="{{IsDisabled}}"
       >
-        <view>{{NationArr[NationIndex].DictName}}</view>
+        <view>{{NationType[NationIndex].DictName}}</view>
       </picker>
     </view>
   </view>
@@ -58,11 +58,11 @@
         value="{{CardIndex}}"
         bindchange="onChange"
         data-target="CardIndex"
-        range="{{CardArr}}"
+        range="{{CardType}}"
         range-key="DictName"
         disabled="{{IsDisabled}}"
       >
-        <view>{{CardArr[CardIndex].DictName}}</view>
+        <view>{{CardType[CardIndex].DictName}}</view>
       </picker>
     </view>
   </view>
@@ -94,7 +94,11 @@
 </view>
 <view class="fixed flex ai jc">
   <view class="flex_item" wx:if="{{IsDisabled}}">
+<<<<<<< HEAD
+    <view class="btn btn_modify" bind:tap="onEdit">修改</view>
+=======
     <view class="btn btn_modify" bind:tap="onModify">修改</view>
+>>>>>>> 7e1bd86cfc2c09a9f520d01af597a81ec56a7061
   </view>
   <view class="flex_item">
     <view class="btn btn_add" bind:tap="onAdd">添加</view>

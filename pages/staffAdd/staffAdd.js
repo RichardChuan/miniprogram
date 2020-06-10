@@ -1,4 +1,5 @@
-let utils = require('../../utils/utils');
+const app = getApp();
+const utils = require('../../utils/utils');
 let oper = '';
 Page({
   data: {
@@ -13,56 +14,48 @@ Page({
     // 身份证号
     CardCode : '',
     // 证件类型字典
-    CardArr:[],
+    CardType:[],
     // 证件类型默认选项索引
     CardIndex:0,
     // 民族字典
-    NationArr:[],
+    NationType:[],
     // 民族默认选项索引
     NationIndex:12,
   },
   onLoad(options){
     let _this = this;
+    _this.setData({
+      CardType:app.globalData.CardType,
+      NationType:app.globalData.NationType
+    })
     console.log(options);
-    let keyArr = Object.keys(options);
-    console.log(options);
-    _this.getArr('NationArr');
-    _this.getArr('CardArr');
-    if(keyArr.length != 0){
+    let keyType = Object.keys(options);
+    console.log(keyType);
+
+    if(keyType.length != 0){
       console.log(options.idCard);
       let idCard = JSON.parse(options.idCard);
       console.log(idCard);
       _this.setData({
         Name:idCard.name.text,
-        Sex:idCard.gender.text,
+        Sex:idCard.gender.text=='男'?'M':'F',
         Address:idCard.address.text,
         CardCode:idCard.id.text,
+        IsDisabled:true
       })
     }
   },
   // onReady(){
   //   if(idCard){
-  //     this.getMapArr(idCard,'NationText',this.data.NationArr,'NationIndex');
-  //     this.getMapArr(idCard,'CardText',this.data.CardArr,'CardIndex');
-  //     this.getMapArr(idCard,'WorkText',this.data.WorkArr,'WorkIndex');
+  //     this.getMapType(idCard,'NationText',this.data.NationType,'NationIndex');
+  //     this.getMapType(idCard,'CardText',this.data.CardType,'CardIndex');
+  //     this.getMapType(idCard,'WorkText',this.data.WorkType,'WorkIndex');
   //   }
   // },
-  // 获取滚动选择器数据
-  getArr(key){
-    let _this = this;
-    if(_this.data[key].length == 0){
-      utils.storage.Get(key,true)
-      .then(function(res){
-        _this.setData({
-          [key]:res
-        })
-      })
-    }
-  },
-  getMapArr(obj,key,array,vari){
+  getMapType(obj,key,Typeay,vari){
     let _this = this;
     if(obj.hasOwnProperty(key)){
-      array.map(function(e,i){
+      Typeay.map(function(e,i){
         if(e.DictName.indexOf(obj[key]) != -1){
           _this.setData({
             [vari]:i
@@ -91,12 +84,12 @@ Page({
       Id:this.data.Id,
       Name:this.data.Name,
       Sex:this.data.Sex,
-      NationType:this.data.NationArr[this.data.NationIndex].Id,
-      CardType:this.data.CardArr[this.data.CardIndex].Id,
+      NationType:this.data.NationType[this.data.NationIndex].Id,
+      CardType:this.data.CardType[this.data.CardIndex].Id,
       CardCode:this.data.CardCode,
       Address:this.data.Address,
 
-      WorkType:this.data.WorkArr[this.data.WorkIndex].Id,
+      WorkType:this.data.WorkType[this.data.WorkIndex].Id,
       Phone:this.data.Phone,
 
       IsSafetyTraining:this.data.IsSafetyTraining,
@@ -147,19 +140,19 @@ Page({
       method:methods,
       data
     })
-    .then(function(res){
+    .then((res)=>{
       wx.showToast({
         title:titles,
         icon:'none',
         mask:true,
-        success:function(){
+        success(){
           wx.redirectTo({
             url:'/pages/staff/staff',
           });
         }
       });
     })
-    .catch(function(err){
+    .catch((err)=>{
       wx.showModal({
         title:'提示',
         content:contents,
