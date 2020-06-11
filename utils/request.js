@@ -1,7 +1,5 @@
 const apiUrl = 'https://www.yumeilinjianzhu.net.cn/apitest';
 
-let UserName = '';
-let Password = '';
 let Authorization = '';
 let icmtenant = '';
 let isLogining = false;
@@ -21,9 +19,9 @@ function isHttpSuccess(status){
 */
 function getAccessToken(){
   return new Promise((resolve,reject)=>{
+    // 本地token丢失，重新获取
     Authorization = wx.getStorageSync('Authorization');
     icmtenant = wx.getStorageSync('icmtenant');
-    // 本地token丢失，重新获取
     if(!Authorization || !icmtenant){
       if(!isLogining){
         isLogining = true;
@@ -34,7 +32,7 @@ function getAccessToken(){
         })
         .catch(()=>{
           isLogining = false;
-          reject();
+          reject(false);
         });
       }
     } else{
@@ -47,21 +45,21 @@ function getAccessToken(){
 */
 function login(){
   return new Promise((resolve,reject)=>{
-    UserName = wx.getStorageSync('UserName');
-    Password = wx.getStorageSync('Password');
     // 本地账号丢失，重新获取
+    const UserName = wx.getStorageSync('UserName');
+    const Password = wx.getStorageSync('Password');
     if(!UserName || !Password){
-      reject();
       wx.redirectTo({
         url:'/pages/login/login',
       });
+      reject();
     }else{
       requestP({
         url:'/api/account/weixin/auth',
         method:'post',
         data:{
-          'UserName':UserName,
-          'Password':Password
+          UserName,
+          Password
         },
       },false)
       .then((res)=>{
@@ -73,11 +71,12 @@ function login(){
         resolve();
       })
       .catch(()=>{
-        reject();
+        console.log(11111111);
         wx.clearStorage();
         wx.redirectTo({
           url:'/pages/login/login',
         });
+        reject();
       })
     }
   });
@@ -97,7 +96,7 @@ function requestP(options = {}){
     fail,
     complete,
   } = options;
-
+  
   // 统一注入约定的header
   const header = Object.assign({
     Authorization,
@@ -156,7 +155,7 @@ function request(options = {},keepLogin = true){
           resolve(r1);
         })
         .catch((err)=>{
-          if(err==undefined){
+          if(!err){
             wx.removeStorageSync('Authorization');
             wx.removeStorageSync('icmtenant');
             getAccessToken()
@@ -175,6 +174,7 @@ function request(options = {},keepLogin = true){
         });
       })
       .catch(()=>{
+        console.log(2222222222);
         wx.clearStorage();
         wx.redirectTo({
           url:'/pages/login/login',

@@ -56,7 +56,7 @@ Page({
       confirmColor: '#3CC51F',
       success: (result) => {
         if(result.confirm){
-          
+          utils.storage.rm();
         }
       },
       fail: ()=>{},

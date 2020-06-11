@@ -30,6 +30,9 @@ Page({
       }
     ]
   },
+  onReady(){
+    
+  },
   onTap(e){
     let type = e.currentTarget.dataset.type;
     let attr = e.currentTarget.dataset.attr;

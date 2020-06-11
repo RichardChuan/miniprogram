@@ -40,20 +40,6 @@ Page({
       })
     }
   },
-  onReady(){
-    app.onInitData({
-      key:'CardType',
-      url:'/api/app/dictItem/cardType'
-    })
-    app.onInitData({
-      key:'NationType',
-      url:'/api/app/dictItem/nationType'
-    })
-    app.onInitData({
-      key:'WorkType',
-      url:'/api/app/dictItem/workType'
-    })
-  },
   getMapType(obj,key,Typeay,vari){
     let _this = this;
     if(obj.hasOwnProperty(key)){

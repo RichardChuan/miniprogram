@@ -37,6 +37,20 @@ Page({
       }
     ],
   },
+  onReady(){
+    app.onInitData({
+      key:'CardType',
+      url:'/api/app/dictItem/cardType'
+    })
+    app.onInitData({
+      key:'NationType',
+      url:'/api/app/dictItem/nationType'
+    })
+    app.onInitData({
+      key:'WorkType',
+      url:'/api/app/dictItem/workType'
+    })
+  },
   onTap(e){
     let type = e.currentTarget.dataset.type;
     let attr = e.currentTarget.dataset.attr;

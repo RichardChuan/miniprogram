@@ -4,7 +4,7 @@ Page({
   data:{
     isView:false,
   },
-  onTap(){
+  onSwitch(){
     let isView = !this.data.isView;
     this.setData({
       isView
@@ -12,11 +12,9 @@ Page({
   },
   onSubmit(e){
     if(!e.detail.value.UserName || !e.detail.value.Password){
-      wx.showToast({
-        title:'账号名密码错误,请重试',
-        icon: 'none',
-        duration:1000,
-      });
+      utils.toast({
+        title:'账号名密码错误,请重试'
+      })
       return false;
     }
 
@@ -26,26 +24,22 @@ Page({
       data:e.detail.value,
     },false)
     .then((res)=>{
-      let Authorization = res.token_type + ' ' + res.access_token;
-      let icmtenant = res.tenant_id;
-      wx.setStorageSync('UserName',e.detail.value.UserName);
-      wx.setStorageSync('Password',e.detail.value.Password);
-      wx.setStorageSync('Authorization',Authorization);
-      wx.setStorageSync('icmtenant',icmtenant);
-      wx.showToast({
-        title:'登录成功',
-        icon: 'none',
-        duration:1000,
-      });
-      wx.switchTab({
-        url: '/pages/index/index'
+      utils.storage.Set('UserName',e.detail.value.UserName,true);
+      utils.storage.Set('Password',e.detail.value.Password,true);
+      utils.storage.Set('Authorization',(res.token_type + ' ' + res.access_token),true);
+      utils.storage.Set('icmtenant',res.tenant_id,true);
+      utils.toast({
+        title:'登录成功'
+      })
+      .then(()=>{
+        wx.switchTab({
+          url: '/pages/index/index'
+        });
       });
     })
     .catch((err)=>{
-      wx.showToast({
-        title:err.msg,
-        icon: 'none',
-        duration:1000,
+      utils.toast({
+        title:err.msg
       });
     })
   }

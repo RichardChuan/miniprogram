@@ -10,18 +10,12 @@ App({
   },
   onLaunch(){
     utils.storage.Get('Authorization',true)
-    .then(()=>{
-      wx.switchTab({
-        url:'/pages/index/index',
-      });
-    })
     .catch(()=>{
       wx.redirectTo({
-        url:'/pages/login/login',
+        url:'/pages/login/login'
       });
     })
   },
-
   onInitData(options){
     let _this = this;
     utils.storage.Get(options.key)
