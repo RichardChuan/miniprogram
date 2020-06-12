@@ -58,14 +58,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "login",
-					"pathName": "pages/login/login",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

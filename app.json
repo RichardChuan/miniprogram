@@ -5,8 +5,7 @@
     "pages/staffAdd/staffAdd",
     "pages/staffEdit/staffEdit",
     "pages/staffList/staffList",
-    "pages/my/my",
-    "pages/login/login"
+    "pages/my/my"
   ],
   "window": {
     "navigationBarBackgroundColor": "#FFFFFF",
@@ -39,6 +38,7 @@
     "weui": true
   },
   "usingComponents": {
-    "top-tips": "weui-miniprogram/toptips/toptips"
+    "toptips": "weui-miniprogram/toptips/toptips",
+    "actionsheet": "weui-miniprogram/actionsheet/actionsheet"
   }
 }

@@ -9,4 +9,4 @@
 </block>
 
 
-<top-tips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></top-tips>
+<toptips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></toptips>

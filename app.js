@@ -11,8 +11,8 @@ App({
   onLaunch(){
     utils.storage.Get('Authorization',true)
     .catch(()=>{
-      wx.redirectTo({
-        url:'/pages/login/login'
+      wx.switchTab({
+        url:'/pages/my/my'
       });
     })
   },

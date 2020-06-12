@@ -70,7 +70,7 @@
     <view class="item_title">证件号码：</view>
     <view class="item_content flex_item">
       <input
-        type="number"
+        type="idcard"
         value="{{CardCode}}"
         bindinput="onChange"
         data-target="id"

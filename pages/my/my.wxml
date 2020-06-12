@@ -1,7 +1,59 @@
-<view class="list">
-  <view class="list_item" wx:for="{{list}}" wx:key="id">
-    <view class="item_left">{{item.name}}</view>
-    <view class="item_right">{{valueList[item.key]}}</view>
-  </view>
-  <button class="btn" hover-class="hoverBtn" bind:tap="onTap" style="width:100%;">退出登录</button>
+<view class="my_list">
+  <block wx:if="{{isLogin}}">
+    <view class="my_item mar32 flex" wx:for="{{list}}" wx:key="id">
+      <view class="my_item_self">{{item.name}}</view>
+      <view class="flex_item">{{valueList[item.key]}}</view>
+    </view>
+    <view class="my_item mar32">
+      <button
+        class="btn btn_hollow"
+        hover-class="btn_hollow_hover"
+        bind:tap="onSignOut"
+        style="width:100%;"
+      >退出登录</button>
+    </view>
+  </block>
+  <block wx:else>
+    <form bindsubmit="onSignIn">
+      <view class="my_item mar32 flex bd_radius box_shadow">
+        <input
+          class="flex_item"
+          type="text"
+          placeholder="账号"
+          name="UserName"
+        ></input>
+      </view>
+      <view class="my_item mar32 flex bd_radius box_shadow">
+        <input
+          class="flex_item"
+          type="text"
+          placeholder="密码"
+          name="Password"
+          password="{{isHide}}"
+        ></input>
+        <view class="viewBtn" bind:tap="onSwitch">
+          <image wx:if="{{!isHide}}" src="/images/icon/ico-view.png" mode="aspectFit"></image>
+          <image wx:if="{{isHide}}" src="/images/icon/ico-view-off.png" mode="aspectFit"></image>
+        </view>
+      </view>
+      <view class="my_item mar32">
+        <button
+          class="btn btn_solid"
+          hover-class="btn_solid_hover"
+          form-type="submit"
+          style="width:100%;"
+        >登录</button>
+      </view>
+    </form>
+  </block>
 </view>
+
+<actionsheet
+  bind:actionhide="onActionClose"
+  bindactiontap="onActionTap"
+  show="{{actionShow}}"
+  actions="{{actionGroup}}"
+  title="是否退出登录？"
+  mask-closable="{{false}}"
+></actionsheet>
+

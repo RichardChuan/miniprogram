@@ -2,6 +2,21 @@ const app = getApp();
 const utils = require('../../utils/utils');
 Page({
   data:{
+    // 是否登录
+    isLogin:true,
+    // 密码是否隐藏
+    isHide:true,
+    // 是否显示actionSheet
+    actionShow:false,
+    // actionSheet选项
+    actionGroup:[
+      {
+        text:'确认',
+        type:'warn', 
+        value:true
+      }
+    ],
+    // 用户信息
     list:[
       {
         id:0,
@@ -24,10 +39,26 @@ Page({
         key:'TenantName',
       }
     ],
+    // 用户数据
     valueList:[],
-    hideModal: true, //模态框的状态  true-隐藏  false-显示
   },
+  
   onReady(){
+    this.getUserInfo();
+  },
+  onSwitch(){
+    let isHide = !this.data.isHide;
+    this.setData({
+      isHide
+    })
+  },
+  onActionClose(){
+    console.log(1);
+  },
+  onActionTap(e){
+    console.log(e);
+  },
+  getUserInfo(){
     let _this = this;
     utils.request({
       url:'/api/app/account/userInfo',
@@ -35,32 +66,62 @@ Page({
     })
     .then((res)=>{
       let valueList = res;
+      // 键值为数组取第一项
       for (const key in res) {
         if(res[key] instanceof Array){
           res[key] = res[key][0];
         }
       }
       _this.setData({
-        valueList
+        valueList,
+        isLogin:true
+      });
+    })
+    .catch(()=>{
+      _this.setData({
+        isLogin:false
       });
     })
   },
-  onTap(){
-    wx.showModal({
-      title: '是否退出登录？',
-      content: '',
-      showCancel: true,
-      cancelText: '取消',
-      cancelColor: '#000000',
-      confirmText: '确定',
-      confirmColor: '#3CC51F',
-      success: (result) => {
-        if(result.confirm){
-          utils.storage.rm();
-        }
-      },
-      fail: ()=>{},
-      complete: ()=>{}
+  onSignIn(e){
+    var _this = this;
+    if(!e.detail.value.UserName || !e.detail.value.Password){
+      utils.toast({
+        title:'账号或密码错误,请重试'
+      })
+      return false;
+    }
+
+    utils.request({
+      url:'/api/account/weixin/auth',
+      method:'post',
+      data:e.detail.value,
+    },false)
+    .then((res)=>{
+      utils.storage.Set('UserName',e.detail.value.UserName,true);
+      utils.storage.Set('Password',e.detail.value.Password,true);
+      utils.storage.Set('Authorization',(res.token_type + ' ' + res.access_token),true);
+      utils.storage.Set('icmtenant',res.tenant_id,true);
+      utils.toast({
+        title:'登录成功',
+        icon:'success',
+        duration:2000
+      })
+    })
+    .catch(()=>{
+      utils.toast({
+        title:'账号名密码错误,请重试'
+      })
+    })
+    .then(()=>{
+      _this.getUserInfo();
     });
+  },
+  onSignOut(){
+    var _this = this;
+    // wx.hideTabBar();
+    _this.setData({
+      actionShow:true
+    })
   }
 })

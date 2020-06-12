@@ -49,8 +49,8 @@ function login(){
     const UserName = wx.getStorageSync('UserName');
     const Password = wx.getStorageSync('Password');
     if(!UserName || !Password){
-      wx.redirectTo({
-        url:'/pages/login/login',
+      wx.switchTab({
+        url:'/pages/my/my',
       });
       reject();
     }else{
@@ -71,10 +71,9 @@ function login(){
         resolve();
       })
       .catch(()=>{
-        console.log(11111111);
         wx.clearStorage();
-        wx.redirectTo({
-          url:'/pages/login/login',
+        wx.switchTab({
+          url:'/pages/my/my',
         });
         reject();
       })
@@ -174,11 +173,11 @@ function request(options = {},keepLogin = true){
         });
       })
       .catch(()=>{
-        console.log(2222222222);
         wx.clearStorage();
-        wx.redirectTo({
-          url:'/pages/login/login',
+        wx.switchTab({
+          url:'/pages/my/my',
         });
+        reject();
       })
     });
   }else{
