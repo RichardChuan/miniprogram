@@ -17,9 +17,6 @@ input,picker{
   border-bottom:1px solid #ebeef5;
   color:#333;
 }
-input[disabled]{
-  color:#9F9F9F;
-}
 radio{
   margin-left:32rpx;
   line-height:96rpx;
@@ -36,10 +33,9 @@ textarea{
   height:112rpx;
   line-height:32rpx;
 }
-textarea[disabled]{
+input[disabled],radio[disabled],picker[disabled],textarea[disabled]{
   color:#9F9F9F;
 }
-
 
 .fixed{
   position:fixed;

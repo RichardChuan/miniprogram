@@ -73,7 +73,7 @@
         type="idcard"
         value="{{CardCode}}"
         bindinput="onChange"
-        data-target="id"
+        data-target="CardCode"
         placeholder="请输入证件号码"
         disabled="{{IsDisabled}}"
       ></input>
@@ -100,3 +100,5 @@
     <view class="btn btn_add" bind:tap="onAdd">添加</view>
   </view>
 </view>
+
+<toptips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></toptips>

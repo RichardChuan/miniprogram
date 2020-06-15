@@ -49,9 +49,8 @@
 </view>
 
 <actionsheet
-  bind:actionhide="onActionClose"
   bindactiontap="onActionTap"
-  show="{{actionShow}}"
+  show="{{isActionShow}}"
   actions="{{actionGroup}}"
   title="是否退出登录？"
   mask-closable="{{false}}"

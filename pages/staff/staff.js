@@ -2,6 +2,7 @@ const app = getApp();
 const utils = require('../../utils/utils');
 Page({
   data:{
+    // 提示信息
     tips:{
       type:'',
       msg:''
@@ -86,6 +87,7 @@ Page({
     })
   },
   getOcrInfo(res){
+    let _this = this;
     wx.showLoading({
       title:'信息识别中',
       mask:true

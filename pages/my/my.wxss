@@ -2,12 +2,13 @@
   overflow:hidden;
 }
 .my_item{
-  height:96rpx;
   line-height:96rpx;
   font-size:36rpx;
 }
 .my_item_self{
   width:200rpx;
+  height:96rpx;
+  overflow:hidden;
   text-align:justify;
 }
 .my_item_self:after{

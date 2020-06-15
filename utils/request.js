@@ -13,31 +13,59 @@ function isHttpSuccess(status){
   // return (status >= 200 && status < 300)|| status == = 304;
   return status == 200;
 }
-
 /**
-* 获取token
-*/
-function getAccessToken(){
+ * promise请求
+ * @param {object} options{}
+ */
+function requestP(options = {}){
+  const url = apiUrl + options.url;
+  const{
+    data,
+    method,
+    dataType,
+    responseType,
+    success,
+    fail,
+    complete,
+  } = options;
+  
+  // 统一注入约定的header
+  const header = Object.assign({
+    Authorization,
+    icmtenant,
+    'Content-Type':'application/json'
+  },options.header);
+
   return new Promise((resolve,reject)=>{
-    // 本地token丢失，重新获取
-    Authorization = wx.getStorageSync('Authorization');
-    icmtenant = wx.getStorageSync('icmtenant');
-    if(!Authorization || !icmtenant){
-      if(!isLogining){
-        isLogining = true;
-        login()
-        .then(()=>{
-          isLogining = false;
-          resolve();
-        })
-        .catch(()=>{
-          isLogining = false;
-          reject(false);
-        });
-      }
-    } else{
-      resolve();
-    }
+    wx.request({
+      url,
+      data,
+      header,
+      method,
+      dataType,
+      responseType,
+      success(res){
+        const isSuccess = isHttpSuccess(res.statusCode);
+        if(isSuccess){
+          if(success){
+            success(res.data);
+          }
+          resolve(res.data);
+        }else{
+          if(fail){
+            fail(res);
+          }
+          reject(res);
+        }
+      },
+      fail(err){
+        if(fail){
+          fail(err);
+        }
+        reject(err);
+      },
+      complete,
+    });
   });
 }
 /**
@@ -68,7 +96,7 @@ function login(){
         icmtenant = res.tenant_id;
         wx.setStorageSync('Authorization',Authorization);
         wx.setStorageSync('icmtenant',icmtenant);
-        resolve();
+        resolve(res);
       })
       .catch(()=>{
         wx.clearStorage();
@@ -81,61 +109,29 @@ function login(){
   });
 }
 /**
- * promise请求
- * @param {object} options{}
- */
-function requestP(options = {}){
-  const url = apiUrl + options.url;
-  const{
-    data,
-    method,
-    dataType,
-    responseType,
-    success,
-    fail,
-    complete,
-  } = options;
-  
-  // 统一注入约定的header
-  const header = Object.assign({
-    Authorization,
-    icmtenant,
-    'Content-Type':'application/json'
-  },options.header);
+* 获取token
+*/
+function getAccessToken(){
   return new Promise((resolve,reject)=>{
-    wx.request({
-      url,
-      data,
-      header,
-      method,
-      dataType,
-      responseType,
-      success(res){
-        const isSuccess = isHttpSuccess(res.statusCode);
-        if(isSuccess){
-          if(success){
-            success(res.data);
-          }
-          resolve(res.data);
-        }else{
-          if(fail){
-            fail();
-          }
+    // 本地token丢失，重新获取
+    Authorization = wx.getStorageSync('Authorization');
+    icmtenant = wx.getStorageSync('icmtenant');
+    if(!Authorization || !icmtenant){
+      if(!isLogining){
+        isLogining = true;
+        login()
+        .then(()=>{
+          isLogining = false;
+          resolve();
+        })
+        .catch(()=>{
+          isLogining = false;
           reject();
-        }
-      },
-      fail(err){
-        if(fail){
-          fail({
-            msg:err.errMsg,
-          });
-        }
-        reject({
-          msg:err.errMsg,
         });
-      },
-      complete,
-    });
+      }
+    } else{
+      resolve();
+    }
   });
 }
 /**
@@ -150,21 +146,21 @@ function request(options = {},keepLogin = true){
       .then(()=>{
         // 获取token成功，发起请求
         requestP(options)
-        .then((r1)=>{
-          resolve(r1);
+        .then((res1)=>{
+          resolve(res1);
         })
         .catch((err)=>{
-          if(!err){
+          if(!isHttpSuccess(err.statusCode)){
             wx.removeStorageSync('Authorization');
             wx.removeStorageSync('icmtenant');
             getAccessToken()
             .then(()=>{
               requestP(options)
-              .then((r2)=>{
-                resolve(r2);
+              .then((res2)=>{
+                resolve(res2);
               })
-              .catch((err)=>{
-                reject(err);
+              .catch((err2)=>{
+                reject(err2);
               })
             })
           }else{

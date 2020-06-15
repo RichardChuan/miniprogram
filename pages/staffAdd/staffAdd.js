@@ -5,6 +5,11 @@ Page({
   data: {
     // 是否可用
     IsDisabled:false,
+    // 提示信息
+    tips:{
+      type:'',
+      msg:''
+    },
     // 姓名
     Name : '',
     // 性别
@@ -24,11 +29,34 @@ Page({
   },
   onLoad(options){
     let _this = this;
-    console.log(app.globalData)
-    _this.setData({
-      CardType:app.globalData.CardType,
-      NationType:app.globalData.NationType
-    })
+    if(!_this.data.CardType.length){
+      app.onInitData({
+        key:'CardType',
+        url:'/api/app/dictItem/cardType'
+      })
+      .then(()=>{
+        _this.setData({
+          CardType:app.globalData.CardType
+        })
+      })
+    }
+    if(!_this.data.NationType.length){
+      app.onInitData({
+        key:'NationType',
+        url:'/api/app/dictItem/nationType'
+      })
+      .then(()=>{
+        _this.setData({
+          NationType:app.globalData.NationType
+        })
+      })
+    }
+
+    // _this.setData({
+    //   CardType:app.globalData.CardType,
+    //   NationType:app.globalData.NationType
+    // })
+
     if(options.idCard != undefined){
       let idCard = JSON.parse(options.idCard);
       _this.setData({
@@ -39,18 +67,7 @@ Page({
         IsDisabled:true
       })
     }
-  },
-  getMapType(obj,key,Typeay,vari){
-    let _this = this;
-    if(obj.hasOwnProperty(key)){
-      Typeay.map(function(e,i){
-        if(e.DictName.indexOf(obj[key]) != -1){
-          _this.setData({
-            [vari]:i
-          })
-        }
-      })
-    }
+    
   },
   // 修改表单的值
   onChange(e){
@@ -68,85 +85,53 @@ Page({
   // 添加数据
   onAdd(){
     let _this = this;
+    
+    if(!_this.data.Name || !_this.data.CardCode || !_this.data.Address){
+      _this.setData({
+        tips:{
+          type:'error',
+          msg:'身份信息不全，请填写'
+        }
+      })
+      return false;
+    }
     let data = {
-      Id:this.data.Id,
       Name:this.data.Name,
       Sex:this.data.Sex,
       NationType:this.data.NationType[this.data.NationIndex].Id,
       CardType:this.data.CardType[this.data.CardIndex].Id,
       CardCode:this.data.CardCode,
-      Address:this.data.Address,
-
-      WorkType:this.data.WorkType[this.data.WorkIndex].Id,
-      Phone:this.data.Phone,
-
-      IsSafetyTraining:this.data.IsSafetyTraining,
-      IsRecord:this.data.IsRecord
+      Address:this.data.Address
     }
-    if(data.Name && data.Sex && data.CardCode && data.Address &&data.Phone){
-      _this.submitData(data);
-    }else{
-      if(!data.Name || !data.Sex || !data.CardCode || !data.Address){
-        wx.showToast({
-          title:'身份信息不全，请填写',
-          mask:true,
-        })
-      }else{
-        wx.showModal({
-          title: '提示',
-          content: '信息不全是否添加',
-          showCancel: true,
-          cancelText: '取消',
-          cancelColor: '#3b77e3',
-          confirmText: '确定',
-          confirmColor: '#666',
-          success:(result) => {
-            if(result.confirm){
-              _this.submitData(data);
-            }
-          }
-        });
-      }
-    }
-  },
-  submitData(data){
-    let methods,titles,contents;
-    if(oper=='update'){
-      methods = 'put';
-      titles = '更新成功';
-      contents = '操作失败，请重试';
-    }else{
-      methods = 'post';
-      titles = '添加成功';
-      contents = '已添加，请勿重复操作';
-    }
+    wx.showLoading({
+      title: '请稍后',
+    });
     utils.request({
       url:'/api/app/employee',
-      header:{
-        'Content-Type':'application/json'
-      },
-      method:methods,
+      method:'post',
       data
     })
-    .then((res)=>{
-      wx.showToast({
-        title:titles,
-        icon:'none',
-        mask:true,
-        success(){
-          wx.redirectTo({
-            url:'/pages/staff/staff',
-          });
+    .then(()=>{
+      wx.hideLoading();
+      _this.setData({
+        tips:{
+          type:'success',
+          msg:'添加成功'
         }
-      });
+      })
+      // wx.redirectTo({
+      //   url:'/pages/staff/staff',
+      // });
     })
     .catch((err)=>{
-      wx.showModal({
-        title:'提示',
-        content:contents,
-        confirmText:'确定',
-        confirmColor:'#3b77e3',
-      });
+      console.log(err);
+      wx.hideLoading();
+      _this.setData({
+        tips:{
+          type:'error',
+          msg:err.data.Error.Message
+        }
+      })
     })
   }
 })

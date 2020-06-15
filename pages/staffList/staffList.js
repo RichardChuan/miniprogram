@@ -2,7 +2,7 @@ const app = getApp();
 const utils = require('../../utils/utils');
 let list = [];
 let begin = 0;  // 起点
-let num = 10;    // 请求数量
+let num = 20;    // 请求数量
 let len = num;    // 实际数量
 Page({
   /**
@@ -43,8 +43,11 @@ Page({
     if(num > len){
       wx.showLoading({
         title:'没有了',
-        mask:true
+        mask:true,
       });
+      setTimeout(function() {
+        wx.hideLoading()
+      }, 2000)
       return false;
     }
     wx.showLoading({
@@ -68,6 +71,7 @@ Page({
     })
     .catch((err)=>{
       wx.hideLoading();
+      console.log(1111);
     })
   },
   getArrMap(arr){

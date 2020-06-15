@@ -16,9 +16,9 @@ App({
       });
     })
   },
-  onInitData(options){
+  onInitData(options,isSync = false){
     let _this = this;
-    utils.storage.Get(options.key)
+    return utils.storage.Get(options.key,isSync)
     .then((res)=>{
       _this.globalData[options.key] = res;
     })

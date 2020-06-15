@@ -1,5 +1,6 @@
 const app = getApp();
 const utils = require('../../utils/utils');
+
 Page({
   data:{
     // 是否登录
@@ -7,7 +8,7 @@ Page({
     // 密码是否隐藏
     isHide:true,
     // 是否显示actionSheet
-    actionShow:false,
+    isActionShow:false,
     // actionSheet选项
     actionGroup:[
       {
@@ -44,19 +45,8 @@ Page({
   },
   
   onReady(){
+    let _this = this;
     this.getUserInfo();
-  },
-  onSwitch(){
-    let isHide = !this.data.isHide;
-    this.setData({
-      isHide
-    })
-  },
-  onActionClose(){
-    console.log(1);
-  },
-  onActionTap(e){
-    console.log(e);
   },
   getUserInfo(){
     let _this = this;
@@ -66,12 +56,6 @@ Page({
     })
     .then((res)=>{
       let valueList = res;
-      // 键值为数组取第一项
-      for (const key in res) {
-        if(res[key] instanceof Array){
-          res[key] = res[key][0];
-        }
-      }
       _this.setData({
         valueList,
         isLogin:true
@@ -119,9 +103,27 @@ Page({
   },
   onSignOut(){
     var _this = this;
-    // wx.hideTabBar();
     _this.setData({
-      actionShow:true
+      isActionShow:true
     })
+  },
+  onSwitch(){
+    let isHide = !this.data.isHide;
+    this.setData({
+      isHide
+    })
+  },
+  onActionTap(e){
+    let _this = this;
+    if(e.detail.value){
+      utils.storage.rm()
+      .then(()=>{
+        _this.setData({
+          isLogin:false,
+          isActionShow:false,
+          valueList:[]
+        })
+      })
+    }
   }
 })
