@@ -1,55 +1,61 @@
 const app = getApp();
 const utils = require('../../utils/utils');
-let list = [];
-let begin = 0;  // 起点
-let num = 20;    // 请求数量
-let len = num;    // 实际数量
+
+// 页面数据列表
+let dataLists = [];
+let dataBegin = 0;  // 起点
+let dataNum = 20;   // 请求数量
+let dataLen;        // 实际数量
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
-    list:[]
+    // 页面数据列表
+    dataLists:[],
+    // 数据起点
+    dataBegin:0,
+    // 数据请求数量
+    dataNum:15,
   },
-  onShow(){
-    begin = 0;
-    len = num;
-    list = [];
-  },
+  // onShow(){
+  //   dataBegin = 0;
+  //   dataLen = dataNum;
+  //   dataLists = [];
+  // },
   onReady(){
-    this.getList();
+    this.getData();
   },
   onPullDownRefresh(){
-    this.getList(true);
+    this.getData(true);
     wx.stopPullDownRefresh();
   },
   onReachBottom(){
-    this.getList();
+    this.getData();
   },
+  // 查看详细
   onTap(e){
     let index = e.currentTarget.dataset.index;
-    let idCardJson = JSON.stringify(this.data.list[index]);
+    let idCard = JSON.stringify(this.data.dataLists[index]);
     wx.navigateTo({
-      url: '/pages/staffAdd/staffAdd?idCardJson='+idCardJson+'&operation=update',
+      url: '/pages/staffEdit/staffEdit?idCard='+idCard,
     });
   },
-  getList(flag){
+  getData(flag){
     let _this = this;
-    if(flag){
-      begin = 0;
-      len = num;
-      list = [];
-    }
-    if(num > len){
-      wx.showLoading({
-        title:'没有了',
-        mask:true,
-      });
-      setTimeout(function() {
-        wx.hideLoading()
-      }, 2000)
-      return false;
-    }
+    // if(flag){
+    //   dataBegin = 0;
+    //   dataLen = dataNum;
+    //   dataLists = [];
+    // }
+    
+    // if(dataNum > dataLen){
+    //   wx.showLoading({
+    //     title:'没有了',
+    //     mask:true,
+    //   });
+    //   setTimeout(function() {
+    //     wx.hideLoading()
+    //   }, 2000)
+    //   return false;
+    // }
     wx.showLoading({
       title:'数据加载中，请稍后',
       mask:true
@@ -57,17 +63,17 @@ Page({
     utils.request({
       url:'/api/app/employee/search',
       data:{
-        'MaxResultCount':num,
-        'SkipCount':begin
+        'MaxResultCount':dataNum,
+        'SkipCount':dataBegin
       },
       method:'post'
     })
     .then((res)=>{
-      len = res.Items.length;
-      begin += len;
-      list = list.concat(res.Items);
+      dataLen = res.Items.length;
+      dataBegin += dataLen;
+      dataLists = dataLists.concat(res.Items);
       wx.hideLoading();
-      _this.getArrMap(list);
+      _this.getArrMap(dataLists);
     })
     .catch((err)=>{
       wx.hideLoading();
@@ -84,7 +90,7 @@ Page({
       }
     })
     this.setData({
-      list:newArr
+      dataLists:newArr
     })
   }
 })
