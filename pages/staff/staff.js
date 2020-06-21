@@ -53,6 +53,8 @@ Page({
     })
   },
   onTap(e){
+    app.getLogin();
+    let _this = this;
     let type = e.currentTarget.dataset.type;
     let attr = e.currentTarget.dataset.attr;
     switch(type){
@@ -67,7 +69,7 @@ Page({
         })
         break;
       case 'event':
-        this.getEvent(attr);
+        _this.getEvent(attr);
     }
   },
   getEvent(event){

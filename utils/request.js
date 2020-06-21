@@ -2,7 +2,7 @@ const apiUrl = 'https://www.yumeilinjianzhu.net.cn/apitest';
 
 let Authorization = '';
 let icmtenant = '';
-let isLogining = false;
+// let isLogining = false;
 
 /**
  * 判断请求状态是否成功
@@ -12,6 +12,14 @@ let isLogining = false;
 function isHttpSuccess(status){
   // return (status >= 200 && status < 300)|| status == = 304;
   return status == 200;
+}
+
+function gotoLogin(){
+  wx.hideTabBar();
+  wx.clearStorage();
+  wx.switchTab({
+    url:'/pages/my/my',
+  });
 }
 /**
  * promise请求
@@ -99,10 +107,7 @@ function login(){
         resolve(res);
       })
       .catch(()=>{
-        wx.clearStorage();
-        wx.switchTab({
-          url:'/pages/my/my',
-        });
+        gotoLogin();
         reject();
       })
     }
@@ -117,18 +122,20 @@ function getAccessToken(){
     Authorization = wx.getStorageSync('Authorization');
     icmtenant = wx.getStorageSync('icmtenant');
     if(!Authorization || !icmtenant){
-      if(!isLogining){
-        isLogining = true;
-        login()
-        .then(()=>{
-          isLogining = false;
-          resolve();
-        })
-        .catch(()=>{
-          isLogining = false;
-          reject();
-        });
-      }
+      // if(!isLogining){
+      //   isLogining = true;
+      //   login()
+      //   .then(()=>{
+      //     isLogining = false;
+      //     resolve();
+      //   })
+      //   .catch(()=>{
+      //     isLogining = false;
+      //     reject();
+      //   });
+      // }
+      gotoLogin();
+      reject();
     } else{
       resolve();
     }
@@ -169,10 +176,7 @@ function request(options = {},keepLogin = true){
         });
       })
       .catch(()=>{
-        wx.clearStorage();
-        wx.switchTab({
-          url:'/pages/my/my',
-        });
+        gotoLogin();
         reject();
       })
     });

@@ -5,4 +5,4 @@
     <view class="item_btn btn_check" bind:tap="onTap" data-index="{{index}}">查看</view>
   </view>
 </view>
-<view class="footer_item"><view class="hr"></view><view class="footer_item_text">没有更多了</view></view>
+<view class="footer_item" wx:if="{{isBottom}}"><view class="hr"></view><view class="footer_item_text">没有更多了</view></view>

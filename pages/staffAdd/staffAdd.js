@@ -11,13 +11,13 @@ Page({
       msg:''
     },
     // 姓名
-    Name : '',
+    Name:'',
     // 性别
-    Sex : 'M',
+    Sex:'M',
     // 住址
-    Address : '',
+    Address:'',
     // 身份证号
-    CardCode : '',
+    CardCode:'',
     // 证件类型字典
     CardType:[],
     // 证件类型默认选项索引
@@ -29,33 +29,33 @@ Page({
   },
   onLoad(options){
     let _this = this;
-    if(!_this.data.CardType.length){
-      app.onInitData({
-        key:'CardType',
-        url:'/api/app/dictItem/cardType'
-      })
-      .then(()=>{
-        _this.setData({
-          CardType:app.globalData.CardType
-        })
-      })
-    }
-    if(!_this.data.NationType.length){
-      app.onInitData({
-        key:'NationType',
-        url:'/api/app/dictItem/nationType'
-      })
-      .then(()=>{
-        _this.setData({
-          NationType:app.globalData.NationType
-        })
-      })
-    }
+    // if(!_this.data.CardType.length){
+    //   app.onInitData({
+    //     key:'CardType',
+    //     url:'/api/app/dictItem/cardType'
+    //   })
+    //   .then(()=>{
+    //     _this.setData({
+    //       CardType:app.globalData.CardType
+    //     })
+    //   })
+    // }
+    // if(!_this.data.NationType.length){
+    //   app.onInitData({
+    //     key:'NationType',
+    //     url:'/api/app/dictItem/nationType'
+    //   })
+    //   .then(()=>{
+    //     _this.setData({
+    //       NationType:app.globalData.NationType
+    //     })
+    //   })
+    // }
 
-    // _this.setData({
-    //   CardType:app.globalData.CardType,
-    //   NationType:app.globalData.NationType
-    // })
+    _this.setData({
+      CardType:app.globalData.CardType,
+      NationType:app.globalData.NationType
+    })
 
     if(options.idCard != undefined){
       let idCard = JSON.parse(options.idCard);

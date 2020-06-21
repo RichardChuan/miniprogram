@@ -11,7 +11,7 @@
 .footer_item{
   position:relative;
   height:48rpx;
-  margin:0 128rpx;
+  margin:24rpx 128rpx;
   font-size:28rpx;
   color:#afb1be;
   text-align:center;

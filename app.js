@@ -6,7 +6,7 @@ App({
     // 民族字典
     NationType:[],
     // 工种字典
-    WorkType:[]
+    WorkType:[],
   },
   onLaunch(){
     utils.storage.Get('Authorization',true)
@@ -47,5 +47,16 @@ App({
         ocr_type:options.ocrType
       },
     })
+  },
+  getLogin(){
+    let Authorization = wx.getStorageSync('Authorization');
+    let icmtenant = wx.getStorageSync('icmtenant');
+    if(!Authorization || !icmtenant){
+      wx.hideTabBar();
+      wx.switchTab({
+        url:'/pages/my/my',
+      });
+      return true;
+    }
   }
 })

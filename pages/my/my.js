@@ -29,11 +29,11 @@ Page({
         name:'手机号码：',
         key:'Phone',
       },
-      {
-        id:2,
-        name:'账号权限：',
-        key:'Roles',
-      },
+      // {
+      //   id:2,
+      //   name:'账号权限：',
+      //   key:'Roles',
+      // },
       {
         id:3,
         name:'隶属公司：',
@@ -43,10 +43,19 @@ Page({
     // 用户数据
     valueList:[],
   },
-  
   onReady(){
     let _this = this;
     this.getUserInfo();
+  },
+  onShow(){
+    let _this = this;
+    let Authorization = wx.getStorageSync('Authorization');
+    let icmtenant = wx.getStorageSync('icmtenant');
+    if(!Authorization || !icmtenant){
+      _this.setData({
+        isLogin:false
+      })
+    }
   },
   getUserInfo(){
     let _this = this;
@@ -54,11 +63,13 @@ Page({
       url:'/api/app/account/userInfo',
       method:'get'
     })
-    .then((res)=>{
-      let valueList = res;
+    .then((valueList)=>{
       _this.setData({
         valueList,
         isLogin:true
+      });
+      wx.switchTab({
+        url: '/pages/index/index',
       });
     })
     .catch(()=>{
@@ -71,7 +82,7 @@ Page({
     var _this = this;
     if(!e.detail.value.UserName || !e.detail.value.Password){
       utils.toast({
-        title:'账号或密码错误,请重试'
+        title:'账号或密码错误'
       })
       return false;
     }
@@ -82,8 +93,6 @@ Page({
       data:e.detail.value,
     },false)
     .then((res)=>{
-      utils.storage.Set('UserName',e.detail.value.UserName,true);
-      utils.storage.Set('Password',e.detail.value.Password,true);
       utils.storage.Set('Authorization',(res.token_type + ' ' + res.access_token),true);
       utils.storage.Set('icmtenant',res.tenant_id,true);
       utils.toast({
@@ -91,6 +100,7 @@ Page({
         icon:'success',
         duration:2000
       })
+      wx.showTabBar();
     })
     .catch(()=>{
       utils.toast({
@@ -116,12 +126,12 @@ Page({
   onActionTap(e){
     let _this = this;
     if(e.detail.value){
+      wx.hideTabBar();
       utils.storage.rm()
       .then(()=>{
         _this.setData({
           isLogin:false,
-          isActionShow:false,
-          valueList:[]
+          isActionShow:false
         })
       })
     }

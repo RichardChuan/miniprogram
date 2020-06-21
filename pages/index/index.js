@@ -30,7 +30,12 @@ Page({
       }
     ]
   },
+  onTabItemTap(){
+    app.getLogin();
+  },
   onTap(e){
+    if(app.getLogin()) return false;
+    let _this = this;
     let type = e.currentTarget.dataset.type;
     let attr = e.currentTarget.dataset.attr;
     switch(type){
@@ -45,7 +50,7 @@ Page({
         })
         break;
       case 'event':
-        this.getEvent(attr);
+        _this.getEvent(attr);
         break;
     }
   }
