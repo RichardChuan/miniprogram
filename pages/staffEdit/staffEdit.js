@@ -1,7 +1,7 @@
 const app = getApp();
 const utils = require('../../utils/utils');
 Page({
-  data: {
+  data:{
     // 提示信息
     tips:{
       type:'',
@@ -22,7 +22,7 @@ Page({
     // 工种字典
     WorkType:[],
     // 工种默认选项索引
-    workIndex:0,
+    WorkIndex:0,
     // 安全培训
     IsSafetyTraining:false,
     // 建委备案
@@ -34,39 +34,10 @@ Page({
   },
   onLoad(e){
     let _this = this;
+    _this.setData(JSON.parse(e.idCard));
     _this.setData({
-      workType:app.globalData.workType
+      WorkType:app.globalData.WorkType
     })
-    // if(!_this.data.workType.length){
-    //   app.onInitData({
-    //     key:'workType',
-    //     url:'/api/app/dictItem/workType'
-    //   })
-    //   .then(()=>{
-    //     _this.setData({
-    //       workType:app.globalData.workType
-    //     })
-    //   })
-    // }
-    var idCard = JSON.parse(e.idCard);
-    console.log(idCard);
-    let {
-      Name,
-      Sex,
-      NationText,
-      Address,
-      CardCode,
-      Phone,
-      IsSafetyTraining,
-      IsRecord,
-      WorkCertificateCode,
-      ContractCode,
-    } = idCard;
-    console.log(Name,Sex,NationText,Address,CardCode,Phone,IsSafetyTraining,IsRecord,WorkCertificateCode,ContractCode);
-    console.log(_this.data.workType);
-    _this.data.workType.map(function(e){
-      console.log(e);
-      if(e){}
-    })
-  }
+    _this.data.WorkType.map(function(){})
+  },
 })

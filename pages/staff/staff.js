@@ -38,19 +38,25 @@ Page({
       }
     ],
   },
-  onReady(){
-    app.onInitData({
-      key:'CardType',
-      url:'/api/app/dictItem/cardType'
-    })
-    app.onInitData({
-      key:'NationType',
-      url:'/api/app/dictItem/nationType'
-    })
-    app.onInitData({
-      key:'WorkType',
-      url:'/api/app/dictItem/workType'
-    })
+  onShow(){
+    if(!app.globalData.CardType.length){
+      app.onInitData({
+        key:'CardType',
+        url:'/api/app/dictItem/cardType'
+      })
+    }
+    if(!app.globalData.NationType.length){
+      app.onInitData({
+        key:'NationType',
+        url:'/api/app/dictItem/nationType'
+      })
+    }
+    if(!app.globalData.WorkType.length){
+      app.onInitData({
+        key:'WorkType',
+        url:'/api/app/dictItem/workType'
+      })
+    }
   },
   onTap(e){
     app.getLogin();
@@ -132,14 +138,14 @@ Page({
     // let icmtenant = wx.getStorageSync('icmtenant');
     // console.log(Authorization);
     // wx.uploadFile({
-    //   url: 'https://www.yumeilinjianzhu.net.cn/apitest/apitest/api/uploadfile',
+    //   url:'https://www.yumeilinjianzhu.net.cn/apitest/apitest/api/uploadfile',
     //   filePath:imgSrc,
     //   name:'file',
     //   formData:{
-    //     'files': imgSrc
+    //     'files':imgSrc
     //   },
-    //   header: {
-    //     "Content-Type": "multipart/form-data",
+    //   header:{
+    //     "Content-Type":"multipart/form-data",
     //     Authorization,
     //     icmtenant
     //   },

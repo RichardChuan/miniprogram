@@ -7,13 +7,13 @@ var dataLists = []; // 列表
 var dataBegin = 0;  // 请求起点
 var dataLen;        // 实际数量
 Page({
-  data: {
+  data:{
     // 页面数据列表
     dataLists:[],
     // 是否到底
     isBottom:false
   },
-  onShow(){
+  onReady(){
     dataLists = [];
     dataBegin = 0;
     dataLen = dataNum;
@@ -34,7 +34,7 @@ Page({
     let index = e.currentTarget.dataset.index;
     let idCard = JSON.stringify(this.data.dataLists[index]);
     wx.navigateTo({
-      url: '/pages/staffEdit/staffEdit?idCard='+idCard,
+      url:'/pages/staffEdit/staffEdit?idCard='+idCard,
     });
   },
   getData(){
@@ -60,7 +60,7 @@ Page({
       dataBegin += dataLen;
       if(dataNum > dataLen){
         _this.setData({
-          isBottom: true
+          isBottom:true
         })
       }
       wx.hideLoading();

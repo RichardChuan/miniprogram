@@ -69,7 +69,7 @@ Page({
         isLogin:true
       });
       wx.switchTab({
-        url: '/pages/index/index',
+        url:'/pages/index/index',
       });
     })
     .catch(()=>{

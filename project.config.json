@@ -1,76 +1,76 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
+	"description":"项目配置文件",
+	"packOptions":{
+		"ignore":[]
 	},
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": false,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
+	"setting":{
+		"urlCheck":true,
+		"es6":true,
+		"postcss":true,
+		"preloadBackgroundData":false,
+		"minified":true,
+		"newFeature":true,
+		"coverView":true,
+		"autoAudits":false,
+		"showShadowRootInWxmlPanel":true,
+		"scopeDataCheck":false,
+		"checkInvalidKey":true,
+		"checkSiteMap":false,
+		"uploadWithSourceMap":true,
+		"babelSetting":{
+			"ignore":[],
+			"disablePlugins":[],
+			"outputPath":""
 		},
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
+		"useCompilerModule":false,
+		"userConfirmedUseCompilerModuleSwitch":false
 	},
-	"compileType": "miniprogram",
-	"libVersion": "2.11.1",
-	"appid": "wx9344faae127fdac0",
-	"projectname": "miniprogram",
-	"debugOptions": {
-		"hidedInDevtools": []
+	"compileType":"miniprogram",
+	"libVersion":"2.11.1",
+	"appid":"wx9344faae127fdac0",
+	"projectname":"miniprogram",
+	"debugOptions":{
+		"hidedInDevtools":[]
 	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
+	"isGameTourist":false,
+	"simulatorType":"wechat",
+	"simulatorPluginLibVersion":{},
+	"condition":{
+		"search":{
+			"current":-1,
+			"list":[]
 		},
-		"conversation": {
-			"current": -1,
-			"list": []
+		"conversation":{
+			"current":-1,
+			"list":[]
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
+		"plugin":{
+			"current":-1,
+			"list":[]
 		},
-		"game": {
-			"currentL": -1,
-			"list": []
+		"game":{
+			"currentL":-1,
+			"list":[]
 		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
+		"gamePlugin":{
+			"current":-1,
+			"list":[]
 		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
+		"miniprogram":{
+			"current":-1,
+			"list":[
 				{
-					"id": -1,
-					"name": "pages/staffAdd/staffAdd",
-					"pathName": "pages/staffAdd/staffAdd",
-					"query": "idCard= {\"type\":0,\"name\":{\"text\":\"刘川\"},\"gender\":{\"text\":\"男\"},\"nationality\":{\"text\":\"汉\"},\"birth\":{\"text\":\"1989-10-07\"},\"address\":{\"text\":\"河北省张家口市桥东区东河沿54号楼甲单元402号\"},\"id\":{\"text\":\"130702198910070312\"},\"card_position\":{\"pos\":{\"left_top\":{\"x\":13.28125,\"y\":0},\"right_top\":{\"x\":1673.4375,\"y\":0},\"right_bottom\":{\"x\":1673.4375,\"y\":1062.5},\"left_bottom\":{\"x\":13.28125,\"y\":1062.5}}},\"image_width\":1700,\"image_height\":1080}",
-					"scene": null
+					"id":-1,
+					"name":"pages/staffAdd/staffAdd",
+					"pathName":"pages/staffAdd/staffAdd",
+					"query":"idCard= {\"type\":0,\"name\":{\"text\":\"刘川\"},\"gender\":{\"text\":\"男\"},\"nationality\":{\"text\":\"汉\"},\"birth\":{\"text\":\"1989-10-07\"},\"address\":{\"text\":\"河北省张家口市桥东区东河沿54号楼甲单元402号\"},\"id\":{\"text\":\"130702198910070312\"},\"card_position\":{\"pos\":{\"left_top\":{\"x\":13.28125,\"y\":0},\"right_top\":{\"x\":1673.4375,\"y\":0},\"right_bottom\":{\"x\":1673.4375,\"y\":1062.5},\"left_bottom\":{\"x\":13.28125,\"y\":1062.5}}},\"image_width\":1700,\"image_height\":1080}",
+					"scene":null
 				},
 				{
-					"id": -1,
-					"name": "pages/staffList/staffList",
-					"pathName": "pages/staffList/staffList",
-					"scene": null
+					"id":-1,
+					"name":"pages/staffList/staffList",
+					"pathName":"pages/staffList/staffList",
+					"scene":null
 				}
 			]
 		}

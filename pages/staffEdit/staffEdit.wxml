@@ -1,5 +1,16 @@
-
 <view class="list">
+  <view class="list_top flex ai">
+    <view class="flex_item">
+      <span>{{Name}}</span>
+      <span>{{Sex=="M"?'男':'女'}}</span>
+      <span>{{NationText}}</span>
+    </view>
+    <button style="width:auto;" class="item_btn btn_hollow">联系Ta</button>
+  </view>
+  <view class="list_top">证件号码：{{CardCode}}</view>
+  <view class="list_top">住址：{{Address}}</view>
+</view>
+<view class="list last_list">
   <view class="list_item flex">
     <view class="item_title">手机号：</view>
     <view class="item_content flex_item">
@@ -19,15 +30,15 @@
         value="{{WorkIndex}}"
         bindchange="onChange"
         data-target="WorkIndex"
-        range="{{WorkArr}}"
+        range="{{WorkType}}"
         range-key="DictName"
       >
-        <view>{{WorkArr[WorkIndex].DictName}}</view>
+        <view>{{WorkType[WorkIndex].DictName}}</view>
       </picker>
     </view>
   </view>
   <view class="list_item flex">
-    <view class="item_title">是否参加培训：</view>
+    <view class="item_title">是否安全培训：</view>
     <view class="item_content flex_item">
       <radio-group
         bindchange="onChange"
@@ -49,7 +60,7 @@
     </view>
   </view>
   <view class="list_item flex">
-    <view class="item_title">是否持证上岗：</view>
+    <view class="item_title">是否建委备案：</view>
     <view class="item_content flex_item">
       <radio-group 
         bindchange="onChange" 
@@ -69,6 +80,35 @@
         >否</radio>
       </radio-group>
     </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">上岗证书号：</view>
+    <view class="item_content flex_item">
+      <input
+        type="number"
+        value="{{WorkCertificateCode}}"
+        bindinput="onChange"
+        data-target="WorkCertificateCode"
+        placeholder="请输入手机号"
+      ></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">合同编号：</view>
+    <view class="item_content flex_item">
+      <input
+        type="number"
+        value="{{ContractCode}}"
+        bindinput="onChange"
+        data-target="ContractCode"
+        placeholder="请输入手机号"
+      ></input>
+    </view>
+  </view>
+</view>
+<view class="fixed flex ai jc">
+  <view class="flex_item">
+    <view class="btn btn_solid" bind:tap="onEdit">修改</view>
   </view>
 </view>
 <toptips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></toptips>
