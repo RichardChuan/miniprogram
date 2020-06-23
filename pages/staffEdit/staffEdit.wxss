@@ -1,9 +1,6 @@
 page{
   background-color:#f1f1f1;
 }
-.footer{
-  height:120rpx;
-}
 .list{
   padding:32rpx;
   margin-bottom:32rpx;
@@ -33,16 +30,9 @@ page{
   height:96rpx;
 }
 
-.item_btn{
-  box-sizing:content-box;
-  padding:0 16rpx;
-  height:48rpx;
-  line-height:48rpx;
-  border:1px solid #3b77e3;
-  border-radius:8rpx;
-  font-size:28rpx;
+.footer{
+  height:120rpx;
 }
-
 .fixed{
   position:fixed;
   bottom:0;

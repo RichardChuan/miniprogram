@@ -37,26 +37,6 @@
 .IsOver{
   color:#ff625e;
 }
-.item_btn{
+.btn_mini{
   margin-left:16rpx;
-  padding:0 16rpx;
-  height:48rpx;
-  line-height:48rpx;
-  font-size:28rpx;
-  border-radius:8rpx;
-}
-.btn_yes{
-  background-color:#fff;
-  border:1px solid #1bc47c;
-  color:#1bc47c;
-}
-.btn_no{
-  background-color:#fff;
-  border:1px solid #ff625e;
-  color:#ff625e;
-}
-.btn_check{
-  background-color:#3b77e3;
-  border:1px solid #3b77e3;
-  color:#fff;
 }

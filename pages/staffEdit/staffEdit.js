@@ -3,12 +3,12 @@ const utils = require('../../utils/utils');
 Page({
   data:{
     // 提示信息
-    tips:{
+    Tips:{
       type:'',
       msg:''
     },
     // 拨打电话按钮
-    isPhoneChange:false,
+    IsPhoneChange:false,
     // 姓名
     Name:'',
     // 性别
@@ -40,7 +40,7 @@ Page({
     _this.setData(info);
     if(info.Phone==''){
       _this.setData({
-        isPhoneChange:true
+        IsPhoneChange:true
       })
     }
     let WorkIndex = 0;
@@ -59,7 +59,7 @@ Page({
     let value = e.detail.value;
     if(target == 'Phone'){
       this.setData({
-        isPhoneChange:true
+        IsPhoneChange:true
       })
     }
     this.setData({
@@ -71,8 +71,9 @@ Page({
     wx.showLoading({
       title: '请稍后',
     });
+    console.log(_this.data.ContractCode);
     utils.request({
-      url:'/api/app/employee',
+      url:'/api/app/employee/fromBe',
       method:'put',
       data:{
         Id:_this.data.Id,
@@ -89,9 +90,10 @@ Page({
       }
     })
     .then((res)=>{
+      console.log(res);
       wx.hideLoading();
       _this.setData({
-        tips:{
+        Tips:{
           type:'success',
           msg:'修改成功'
         }
@@ -106,7 +108,7 @@ Page({
     .catch((err)=>{
       wx.hideLoading();
       _this.setData({
-        tips:{
+        Tips:{
           type:'error',
           msg:err.data.Error.Message
         }
@@ -114,6 +116,8 @@ Page({
     })
   },
   onPageBack(data){
+    // console.log(data);
+    // console.log(data.ContractCode);
     let pages = getCurrentPages();
     let prevPage = pages[pages.length-2];
     let dataLists = prevPage.__data__.dataLists;

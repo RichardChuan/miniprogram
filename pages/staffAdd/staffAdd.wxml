@@ -101,4 +101,4 @@
   </view>
 </view>
 
-<toptips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></toptips>
+<toptips type="{{Tips.type}}" show="{{Tips.msg}}" msg="{{Tips.msg}}" delay="2000"></toptips>

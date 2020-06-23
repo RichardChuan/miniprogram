@@ -5,7 +5,7 @@
       <span>{{Sex=="M"?'男':'女'}}</span>
       <span>{{NationText}}</span>
     </view>
-    <button style="width:auto;" class="item_btn btn_hollow" bind:tap="onPhoneCall" disabled="{{isPhoneChange}}">联系Ta</button>
+    <button style="width:auto;" class="btn_mini btn_hollow" bind:tap="onPhoneCall" disabled="{{IsPhoneChange}}">联系Ta</button>
   </view>
   <view class="list_top">证件号码：{{CardCode}}</view>
   <view class="list_top">住址：{{Address}}</view>
@@ -88,9 +88,9 @@
       <input
         type="number"
         value="{{WorkCertificateCode}}"
+        placeholder="请输入岗证书号"
         bindinput="onChange"
         data-target="WorkCertificateCode"
-        placeholder="请输入岗证书号"
       ></input>
     </view>
   </view>
@@ -100,9 +100,9 @@
       <input
         type="number"
         value="{{ContractCode}}"
+        placeholder="请输入合同编号"
         bindinput="onChange"
         data-target="ContractCode"
-        placeholder="请输入合同编号"
       ></input>
     </view>
   </view>
@@ -111,18 +111,18 @@
     <view class="item_content">
       <textarea
         value="{{Remark}}"
+        placeholder="请输入备注信息"
         bindinput="onChange"
         data-target="Remark"
-        placeholder="请输入备注信息"
       ></textarea>
     </view>
   </view>
 </view>
 <view class="footer">
-  <view class="fixed flex ai jc">
+  <view class="fixed flex ai">
     <view class="flex_item">
       <view class="btn btn_solid" bind:tap="onSubmit">修改</view>
     </view>
   </view>
 </view>
-<toptips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></toptips>
+<toptips type="{{Tips.type}}" show="{{Tips.msg}}" msg="{{Tips.msg}}" delay="2000"></toptips>

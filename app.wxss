@@ -46,6 +46,14 @@
   line-clamp:3;
 }
 
+.btn_mini{
+  box-sizing:content-box;
+  padding:0 16rpx;
+  height:48rpx;
+  line-height:48rpx;
+  font-size:28rpx;
+  border-radius:8rpx;
+}
 .btn_solid,.btn_hollow{
   border:1px solid #3b77e3;
   text-align:center;
@@ -64,8 +72,24 @@
 .btn_hollow_hover{
   background-color:#efefef;
 }
-.btn_solid[disabled],.btn_hollow[disabled]{
+
+.btn_yes{
+  background-color:#fff;
+  border:1px solid #1bc47c;
+  color:#1bc47c;
+}
+.btn_no{
+  background-color:#fff;
+  border:1px solid #ff625e;
+  color:#ff625e;
+}
+
+.btn_yes[disabled],
+.btn_no[disabled],
+.btn_solid[disabled],
+.btn_hollow[disabled]{
   border-color:rgba(255,255,255,.6) !important;
+  background-color:rgba(255,255,255,.6) !important;
 }
 
 

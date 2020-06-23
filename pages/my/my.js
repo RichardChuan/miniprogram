@@ -68,9 +68,6 @@ Page({
         valueList,
         isLogin:true
       });
-      wx.switchTab({
-        url:'/pages/index/index',
-      });
     })
     .catch(()=>{
       _this.setData({
@@ -109,6 +106,9 @@ Page({
     })
     .then(()=>{
       _this.getUserInfo();
+      wx.switchTab({
+        url:'/pages/index/index',
+      });
     });
   },
   onSignOut(){

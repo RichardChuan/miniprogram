@@ -6,7 +6,7 @@ Page({
     // 是否可用
     IsDisabled:false,
     // 提示信息
-    tips:{
+    Tips:{
       type:'',
       msg:''
     },
@@ -115,7 +115,7 @@ Page({
     let _this = this;
     if(!_this.data.Name || !_this.data.CardCode || !_this.data.Address){
       _this.setData({
-        tips:{
+        Tips:{
           type:'error',
           msg:'身份信息不全，请填写'
         }
@@ -140,7 +140,7 @@ Page({
     .then(()=>{
       wx.hideLoading();
       _this.setData({
-        tips:{
+        Tips:{
           type:'success',
           msg:'添加成功'
         }
@@ -155,7 +155,7 @@ Page({
       console.log(err);
       wx.hideLoading();
       _this.setData({
-        tips:{
+        Tips:{
           type:'error',
           msg:err.data.Error.Message
         }

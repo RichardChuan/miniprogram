@@ -3,7 +3,7 @@ const utils = require('../../utils/utils');
 Page({
   data:{
     // 提示信息
-    tips:{
+    Tips:{
       type:'',
       msg:''
     },
@@ -115,7 +115,7 @@ Page({
         })
       }else{
         _this.setData({
-          tips:{
+          Tips:{
             type:'error',
             msg:'信息识别失败，请重新识别'
           }
@@ -125,7 +125,7 @@ Page({
     .catch(()=>{
       wx.hideLoading();
       _this.setData({
-        tips:{
+        Tips:{
           type:'error',
           msg:'信息识别失败，请重新识别'
         }

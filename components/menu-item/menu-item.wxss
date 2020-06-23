@@ -20,6 +20,7 @@
    margin:32rpx;
    padding:32rpx;
    border-radius:24rpx;
+   background-color:#fff;
    box-shadow:0rpx 2rpx 30rpx 0rpx rgba(0, 0, 0, 0.1);
 }
 .icon{

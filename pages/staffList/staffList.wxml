@@ -1,9 +1,9 @@
 <view class="list">
   <view class="list_item flex ai" wx:for="{{dataLists}}" wx:key="index">
-    <view class="item_btn {{item.IsCompletion?'btn_yes':'btn_no'}}">{{item.IsCompletion?'信息完整':'信息不全'}}</view>
+    <view class="btn_mini {{item.IsCompletion?'btn_yes':'btn_no'}}">{{item.IsCompletion?'信息完整':'信息不全'}}</view>
     <view class="item_cont flex_item {{item.IsOver?'IsOver':''}}">{{item.Name}}</view>
-    <view class="item_btn btn_hollow" bind:tap="onPhoneCall" data-index="{{index}}">联系Ta</view>
-    <view class="item_btn btn_check" bind:tap="onTap" data-index="{{index}}">查看</view>
+    <view class="btn_mini btn_hollow" bind:tap="onPhoneCall" data-index="{{index}}">联系Ta</view>
+    <view class="btn_mini btn_solid" bind:tap="onTap" data-index="{{index}}">查看</view>
   </view>
 </view>
 <view class="footer_item" wx:if="{{isBottom}}"><view class="hr"></view><view class="footer_item_text">没有更多了</view></view>
