@@ -56,15 +56,3 @@ input[disabled],radio[disabled],picker[disabled],textarea[disabled]{
   font-size:36rpx;
   text-align:center;
 }
-.btn_modify{
-  background-color:#fff;
-  color:#3b77e3;
-}
-.btn_confirm{
-  background-color:#3b77e3;
-  color:#fff;
-}
-.btn_add{
-  background-color:#3b77e3;
-  color:#fff;
-}

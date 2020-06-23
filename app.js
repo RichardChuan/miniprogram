@@ -52,11 +52,19 @@ App({
     let Authorization = wx.getStorageSync('Authorization');
     let icmtenant = wx.getStorageSync('icmtenant');
     if(!Authorization || !icmtenant){
-      wx.hideTabBar();
       wx.switchTab({
         url:'/pages/my/my',
+        success:function(){
+          wx.hideTabBar();
+        }
       });
       return true;
     }
+  },
+  checkPhone(e){
+    return /^1[3456789]\d{9}$/.test(e);
+    // if(!()){ 
+    //   utils.toast({title:'手机号有误'});
+    // }
   }
 })

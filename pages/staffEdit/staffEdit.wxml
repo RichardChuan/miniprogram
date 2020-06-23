@@ -5,7 +5,7 @@
       <span>{{Sex=="M"?'男':'女'}}</span>
       <span>{{NationText}}</span>
     </view>
-    <button style="width:auto;" class="item_btn btn_hollow">联系Ta</button>
+    <button style="width:auto;" class="item_btn btn_hollow" bind:tap="onPhoneCall" disabled="{{isPhoneChange}}">联系Ta</button>
   </view>
   <view class="list_top">证件号码：{{CardCode}}</view>
   <view class="list_top">住址：{{Address}}</view>
@@ -17,9 +17,10 @@
       <input
         type="number"
         value="{{Phone}}"
+        placeholder="请输入手机号"
+        maxlength="11"
         bindinput="onChange"
         data-target="Phone"
-        placeholder="请输入手机号"
       ></input>
     </view>
   </view>
@@ -47,14 +48,14 @@
         <radio
           class="radio"
           color="#3b77e3"
-          value="true"
-          checked="{{IsSafetyTraining?true:false}}"
+          value="1"
+          checked="{{IsSafetyTraining==true?true:false}}"
         >是</radio>
         <radio
           class="radio"
           color="#3b77e3"
-          value="false"
-          checked="{{!IsSafetyTraining?true:false}}"
+          value="0"
+          checked="{{IsSafetyTraining==false?true:false}}"
         >否</radio>
       </radio-group>
     </view>
@@ -69,14 +70,14 @@
         <radio
           class="radio"
           color="#3b77e3"
-          value="true"
-          checked="{{IsRecord?true:false}}"
+          value="1"
+          checked="{{IsRecord==true?true:false}}"
         >是</radio>
         <radio
           class="radio"
           color="#3b77e3"
-          value="false"
-          checked="{{!IsRecord?true:false}}"
+          value="0"
+          checked="{{IsRecord==false?true:false}}"
         >否</radio>
       </radio-group>
     </view>
@@ -89,7 +90,7 @@
         value="{{WorkCertificateCode}}"
         bindinput="onChange"
         data-target="WorkCertificateCode"
-        placeholder="请输入手机号"
+        placeholder="请输入岗证书号"
       ></input>
     </view>
   </view>
@@ -101,14 +102,27 @@
         value="{{ContractCode}}"
         bindinput="onChange"
         data-target="ContractCode"
-        placeholder="请输入手机号"
+        placeholder="请输入合同编号"
       ></input>
     </view>
   </view>
+  <view class="list_item">
+    <view class="item_title">备注信息：</view>
+    <view class="item_content">
+      <textarea
+        value="{{Remark}}"
+        bindinput="onChange"
+        data-target="Remark"
+        placeholder="请输入备注信息"
+      ></textarea>
+    </view>
+  </view>
 </view>
-<view class="fixed flex ai jc">
-  <view class="flex_item">
-    <view class="btn btn_solid" bind:tap="onEdit">修改</view>
+<view class="footer">
+  <view class="fixed flex ai jc">
+    <view class="flex_item">
+      <view class="btn btn_solid" bind:tap="onSubmit">修改</view>
+    </view>
   </view>
 </view>
 <toptips type="{{tips.type}}" show="{{tips.msg}}" msg="{{tips.msg}}" delay="2000"></toptips>

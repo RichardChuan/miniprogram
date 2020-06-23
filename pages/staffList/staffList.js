@@ -23,6 +23,9 @@ Page({
     this.getData();
   },
   onPullDownRefresh(){
+    this.setData({
+      isBottom:false
+    })
     dataLists = [];
     dataBegin = 0;
     dataLen = dataNum;
@@ -32,9 +35,9 @@ Page({
   // 查看详细
   onTap(e){
     let index = e.currentTarget.dataset.index;
-    let idCard = JSON.stringify(this.data.dataLists[index]);
+    let info = JSON.stringify(this.data.dataLists[index]);
     wx.navigateTo({
-      url:'/pages/staffEdit/staffEdit?idCard='+idCard,
+      url:'/pages/staffEdit/staffEdit?info='+info,
     });
   },
   getData(){
@@ -43,7 +46,7 @@ Page({
       return false;
     }
     wx.showLoading({
-      title:'数据加载中，请稍后',
+      title:'数据加载中',
       mask:true
     });
     utils.request({
@@ -71,6 +74,7 @@ Page({
     })
   },
   getArrMap(arr){
+    let _this = this;
     let noArr = [];
     let yesArr = [];
     let newArr = [];
@@ -82,8 +86,15 @@ Page({
       }
     })
     newArr = noArr.concat(yesArr); 
-    this.setData({
+    _this.setData({
       dataLists:newArr
+    })
+  },
+  onPhoneCall(e){
+    let index = e.currentTarget.dataset.index;
+    let Phone = this.data.dataLists[index].Phone;
+    wx.makePhoneCall({
+      phoneNumber:Phone
     })
   }
 })

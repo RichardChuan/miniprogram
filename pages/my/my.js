@@ -126,13 +126,18 @@ Page({
   onActionTap(e){
     let _this = this;
     if(e.detail.value){
-      wx.hideTabBar();
       utils.storage.rm()
       .then(()=>{
         _this.setData({
           isLogin:false,
           isActionShow:false
         })
+        wx.switchTab({
+          url:'/pages/my/my',
+          success:function(){
+            wx.hideTabBar();
+          }
+        });
       })
     }
   }

@@ -34,7 +34,11 @@
 .item_cont{
   margin:0 16rpx;
 }
+.IsOver{
+  color:#ff625e;
+}
 .item_btn{
+  margin-left:16rpx;
   padding:0 16rpx;
   height:48rpx;
   line-height:48rpx;

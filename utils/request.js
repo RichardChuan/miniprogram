@@ -10,15 +10,18 @@ let icmtenant = '';
  * 返回值：[Boolen]
  */
 function isHttpSuccess(status){
-  // return (status >= 200 && status < 300)|| status == = 304;
+  // return (status >= 200 && status < 300)|| status == 304;
   return status == 200;
+  // return status < 500;
 }
 
 function gotoLogin(){
-  wx.hideTabBar();
   wx.clearStorage();
   wx.switchTab({
     url:'/pages/my/my',
+    success:function(){
+      wx.hideTabBar();
+    }
   });
 }
 /**
@@ -53,6 +56,10 @@ function requestP(options = {}){
       dataType,
       responseType,
       success(res){
+        if(res.statusCode >= 500){
+          gotoLogin();
+          return false;
+        }
         const isSuccess = isHttpSuccess(res.statusCode);
         if(isSuccess){
           if(success){
@@ -107,7 +114,6 @@ function login(){
         resolve(res);
       })
       .catch(()=>{
-        gotoLogin();
         reject();
       })
     }
@@ -118,7 +124,6 @@ function login(){
 */
 function getAccessToken(){
   return new Promise((resolve,reject)=>{
-    // 本地token丢失，重新获取
     Authorization = wx.getStorageSync('Authorization');
     icmtenant = wx.getStorageSync('icmtenant');
     if(!Authorization || !icmtenant){
@@ -134,7 +139,6 @@ function getAccessToken(){
       //     reject();
       //   });
       // }
-      gotoLogin();
       reject();
     } else{
       resolve();
@@ -146,6 +150,49 @@ function getAccessToken(){
 * @param {object} options {}
 * @param {boolean} keepLogin true
 */
+// function request(options = {},keepLogin = true){
+//   if(keepLogin){
+//     return new Promise((resolve,reject)=>{
+//       getAccessToken()
+//       .then(()=>{
+//         // 获取token成功，发起请求
+//         requestP(options)
+//         .then((res1)=>{
+//           resolve(res1);
+//         })
+//         .catch((err)=>{
+//           if(!isHttpSuccess(err.statusCode)){
+//             wx.removeStorageSync('Authorization');
+//             wx.removeStorageSync('icmtenant');
+//             getAccessToken()
+//             .then(()=>{
+//               requestP(options)
+//               .then((res2)=>{
+//                 resolve(res2);
+//               })
+//               .catch((err2)=>{
+//                 reject(err2);
+//               })
+//             })
+//           }else{
+//             reject(err);
+//           }
+//         });
+//       })
+//       .catch(()=>{
+
+
+//         gotoLogin();
+//         reject();
+//       })
+//     });
+//   }else{
+//     // 不需要token，直接发起请求
+//     return requestP(options);
+//   }
+// }
+
+
 function request(options = {},keepLogin = true){
   if(keepLogin){
     return new Promise((resolve,reject)=>{
@@ -153,31 +200,31 @@ function request(options = {},keepLogin = true){
       .then(()=>{
         // 获取token成功，发起请求
         requestP(options)
-        .then((res1)=>{
-          resolve(res1);
+        .then((res)=>{
+          resolve(res);
         })
         .catch((err)=>{
-          if(!isHttpSuccess(err.statusCode)){
-            wx.removeStorageSync('Authorization');
-            wx.removeStorageSync('icmtenant');
-            getAccessToken()
-            .then(()=>{
-              requestP(options)
-              .then((res2)=>{
-                resolve(res2);
-              })
-              .catch((err2)=>{
-                reject(err2);
-              })
-            })
-          }else{
-            reject(err);
-          }
+          console.log(1);
+          reject(err);
         });
       })
       .catch(()=>{
-        gotoLogin();
-        reject();
+        getAccessToken()
+        .then(()=>{
+          // 获取token成功，发起请求
+          requestP(options)
+          .then((res)=>{
+            resolve(res);
+          })
+          .catch((err)=>{
+            console.log(1);
+            reject(err);
+          });
+        })
+        .catch(()=>{
+          gotoLogin();
+          // reject();
+        })
       })
     });
   }else{
@@ -185,5 +232,4 @@ function request(options = {},keepLogin = true){
     return requestP(options);
   }
 }
-
 module.exports = request;

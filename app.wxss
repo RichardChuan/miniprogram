@@ -64,6 +64,10 @@
 .btn_hollow_hover{
   background-color:#efefef;
 }
+.btn_solid[disabled],.btn_hollow[disabled]{
+  border-color:rgba(255,255,255,.6) !important;
+}
+
 
 .box_shadow{
   box-shadow:0rpx 2rpx 30rpx 0rpx rgba(0,0,0,0.1);

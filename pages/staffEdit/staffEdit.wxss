@@ -1,16 +1,15 @@
 page{
   background-color:#f1f1f1;
 }
-
+.footer{
+  height:120rpx;
+}
 .list{
   padding:32rpx;
   margin-bottom:32rpx;
   line-height:96rpx;
   font-size:32rpx;
   background-color:#fff;
-}
-.last_list{
-  margin-bottom:120rpx;
 }
 
 .list_item{
