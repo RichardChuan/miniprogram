@@ -204,7 +204,6 @@ function request(options = {},keepLogin = true){
           resolve(res);
         })
         .catch((err)=>{
-          console.log(1);
           reject(err);
         });
       })
@@ -217,7 +216,6 @@ function request(options = {},keepLogin = true){
             resolve(res);
           })
           .catch((err)=>{
-            console.log(1);
             reject(err);
           });
         })

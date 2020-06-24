@@ -71,7 +71,6 @@ Page({
     wx.showLoading({
       title: '请稍后',
     });
-    console.log(_this.data.ContractCode);
     utils.request({
       url:'/api/app/employee/fromBe',
       method:'put',
@@ -90,7 +89,6 @@ Page({
       }
     })
     .then((res)=>{
-      console.log(res);
       wx.hideLoading();
       _this.setData({
         Tips:{
@@ -116,8 +114,6 @@ Page({
     })
   },
   onPageBack(data){
-    // console.log(data);
-    // console.log(data.ContractCode);
     let pages = getCurrentPages();
     let prevPage = pages[pages.length-2];
     let dataLists = prevPage.__data__.dataLists;

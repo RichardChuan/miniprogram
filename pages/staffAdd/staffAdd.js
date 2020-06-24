@@ -55,10 +55,8 @@ Page({
     let idCard = e.idCard?JSON.parse(e.idCard):{};
     let NationIndex = 12;
     let NationType = app.globalData.NationType;
-    console.log(NationType);
     let CardIndex = 0;
     let CardType = app.globalData.CardType;
-    console.log(CardType);
     let IsDisabled;
     if(Object.keys(idCard).length != 0){
       NationType.map(function(e,i){
@@ -152,7 +150,6 @@ Page({
       },2000)
     })
     .catch((err)=>{
-      console.log(err);
       wx.hideLoading();
       _this.setData({
         Tips:{
