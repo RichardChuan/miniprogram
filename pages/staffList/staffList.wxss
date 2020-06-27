@@ -1,3 +1,11 @@
+.header{
+  height:120rpx;
+}
+.header input{
+  padding-left:0;
+  border:0;
+}
+
 .list_item{
   height:96rpx;
   margin-left:32rpx;
@@ -8,6 +16,19 @@
 .list_item:last-child{
   border-bottom:none;
 }
+.IsOver{
+  color:#ff625e;
+}
+.btn_mini{
+  margin:0 16rpx;
+}
+.btn_mini:first-child{
+  margin-left:0;
+}
+.btn_mini:last-child{
+  margin-right:0;
+}
+
 .footer_item{
   position:relative;
   height:48rpx;
@@ -29,14 +50,4 @@
   position:relative;
   padding:0 16rpx;
   background-color:#fff;
-}
-
-.item_cont{
-  margin:0 16rpx;
-}
-.IsOver{
-  color:#ff625e;
-}
-.btn_mini{
-  margin-left:16rpx;
 }

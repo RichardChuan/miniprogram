@@ -132,6 +132,9 @@ Page({
           isLogin:false,
           isActionShow:false
         })
+        app.globalData.CardType = [];
+        app.globalData.NationType = [];
+        app.globalData.WorkType = [];
         wx.switchTab({
           url:'/pages/my/my',
           success:function(){

@@ -5,12 +5,28 @@
       <span>{{Sex=="M"?'男':'女'}}</span>
       <span>{{NationText}}</span>
     </view>
-    <button style="width:auto;" class="btn_mini btn_hollow" bind:tap="onPhoneCall" disabled="{{IsPhoneChange}}">联系Ta</button>
+    <button class="btn_mini btn_hollow" bind:tap="onPhoneCall" disabled="{{IsPhoneChange}}">联系Ta</button>
   </view>
   <view class="list_top">证件号码：{{CardCode}}</view>
   <view class="list_top">住址：{{Address}}</view>
 </view>
 <view class="list last_list">
+  <!-- 工种 -->
+  <view class="list_item flex">
+    <view class="item_title">工种：</view>
+    <view class="item_content flex_item">
+      <picker
+        value="{{WorkIndex}}"
+        range="{{WorkType}}"
+        range-key="DictName"
+        bindchange="onChange"
+        data-target="WorkIndex"
+      >
+        <view>{{WorkType[WorkIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <!-- 手机号 -->
   <view class="list_item flex">
     <view class="item_title">手机号：</view>
     <view class="item_content flex_item">
@@ -24,20 +40,33 @@
       ></input>
     </view>
   </view>
+  <!-- 合同编号 -->
   <view class="list_item flex">
-    <view class="item_title">工种：</view>
+    <view class="item_title">合同编号：</view>
     <view class="item_content flex_item">
-      <picker
-        value="{{WorkIndex}}"
-        bindchange="onChange"
-        data-target="WorkIndex"
-        range="{{WorkType}}"
-        range-key="DictName"
-      >
-        <view>{{WorkType[WorkIndex].DictName}}</view>
-      </picker>
+      <input
+        type="text"
+        value="{{ContractCode}}"
+        placeholder="请输入合同编号"
+        bindinput="onChange"
+        data-target="ContractCode"
+      ></input>
     </view>
   </view>
+  <!-- 上岗证书号 -->
+  <view class="list_item flex">
+    <view class="item_title">上岗证书号：</view>
+    <view class="item_content flex_item">
+      <input
+        type="text"
+        value="{{WorkCertificateCode}}"
+        placeholder="请输入岗证书号"
+        bindinput="onChange"
+        data-target="WorkCertificateCode"
+      ></input>
+    </view>
+  </view>
+  <!-- 安全培训 -->
   <view class="list_item flex">
     <view class="item_title">是否安全培训：</view>
     <view class="item_content flex_item">
@@ -47,19 +76,20 @@
       >
         <radio
           class="radio"
-          color="#3b77e3"
           value="1"
+          color="#3b77e3"
           checked="{{IsSafetyTraining==true?true:false}}"
         >是</radio>
         <radio
           class="radio"
-          color="#3b77e3"
           value="0"
+          color="#3b77e3"
           checked="{{IsSafetyTraining==false?true:false}}"
         >否</radio>
       </radio-group>
     </view>
   </view>
+  <!-- 建委备案 -->
   <view class="list_item flex">
     <view class="item_title">是否建委备案：</view>
     <view class="item_content flex_item">
@@ -69,43 +99,20 @@
       >
         <radio
           class="radio"
-          color="#3b77e3"
           value="1"
+          color="#3b77e3"
           checked="{{IsRecord==true?true:false}}"
         >是</radio>
         <radio
           class="radio"
-          color="#3b77e3"
           value="0"
+          color="#3b77e3"
           checked="{{IsRecord==false?true:false}}"
         >否</radio>
       </radio-group>
     </view>
   </view>
-  <view class="list_item flex">
-    <view class="item_title">上岗证书号：</view>
-    <view class="item_content flex_item">
-      <input
-        type="number"
-        value="{{WorkCertificateCode}}"
-        placeholder="请输入岗证书号"
-        bindinput="onChange"
-        data-target="WorkCertificateCode"
-      ></input>
-    </view>
-  </view>
-  <view class="list_item flex">
-    <view class="item_title">合同编号：</view>
-    <view class="item_content flex_item">
-      <input
-        type="number"
-        value="{{ContractCode}}"
-        placeholder="请输入合同编号"
-        bindinput="onChange"
-        data-target="ContractCode"
-      ></input>
-    </view>
-  </view>
+  <!-- 备注信息 -->
   <view class="list_item">
     <view class="item_title">备注信息：</view>
     <view class="item_content">
@@ -119,7 +126,7 @@
   </view>
 </view>
 <view class="footer">
-  <view class="fixed flex ai">
+  <view class="fixed fixed_bottom flex ai">
     <view class="flex_item">
       <view class="btn btn_solid" bind:tap="onSubmit">修改</view>
     </view>

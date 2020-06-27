@@ -36,7 +36,8 @@ Page({
   },
   onLoad(e){
     let _this = this;
-    let info = JSON.parse(e.info)?JSON.parse(e.info):'';
+    let info = e.info?JSON.parse(e.info):'';
+    console.log(info);
     _this.setData(info);
     if(info.Phone==''){
       _this.setData({

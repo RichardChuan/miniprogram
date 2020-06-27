@@ -133,28 +133,43 @@ Page({
     })
   },
   getUploadImg(res){
-    // let imgSrc = res.tempFilePaths[0];
-    // let Authorization = wx.getStorageSync('Authorization');
-    // let icmtenant = wx.getStorageSync('icmtenant');
-    // console.log(Authorization);
-    // wx.uploadFile({
-    //   url:'https://www.yumeilinjianzhu.net.cn/apitest/apitest/api/uploadfile',
-    //   filePath:imgSrc,
-    //   name:'file',
-    //   formData:{
-    //     'files':imgSrc
-    //   },
-    //   header:{
-    //     "Content-Type":"multipart/form-data",
-    //     Authorization,
-    //     icmtenant
-    //   },
-    //   success(result){
-    //     console.log(result);
-    //   },
-    //   fail(err){
-    //     console.log(err);
-    //   }
-    // })
+    let tempFilePaths = res.tempFilePaths;
+    console.log(tempFilePaths[0]);
+    let Authorization = wx.getStorageSync('Authorization');
+    let icmtenant = wx.getStorageSync('icmtenant');
+    wx.uploadFile({
+      url:'https://www.yumeilinjianzhu.net.cn/apitest/api/uploadfile',
+      filePath:tempFilePaths[0],
+      name:'files',
+      header:{
+        "Content-Type":"multipart/form-data",
+        Authorization,
+        icmtenant
+      },
+      success(res){
+        let data = JSON.parse(res.data);
+        console.log(data);
+        console.log(data.Files[0].Id);
+        utils.request({
+          url:'/api/app/idCardRecord/idRecord',
+          method:'post',
+          data:{
+            'FileId':data.Files[0].Id
+          },
+          success(res){
+            console.log(res);
+          },
+          fail(err){
+            console.log(err);
+          }
+        })
+
+        // res.data
+        // console.log(res.data);
+      },
+      fail(err){
+        console.log(err);
+      }
+    })
   }
 })

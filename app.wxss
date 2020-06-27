@@ -47,6 +47,7 @@
 }
 
 .btn_mini{
+  width:auto !important;
   box-sizing:content-box;
   padding:0 16rpx;
   height:48rpx;
@@ -97,7 +98,6 @@
   box-shadow:0rpx 2rpx 30rpx 0rpx rgba(0,0,0,0.1);
 }
 
-
 input,picker{
   height:96rpx;
   line-height:96rpx;
@@ -123,4 +123,21 @@ textarea{
 }
 input[disabled],radio[disabled],picker[disabled],textarea[disabled]{
   color:#9F9F9F;
+}
+
+.fixed{
+  position:fixed;
+  left:0;
+  z-index:999;
+  width:100%;
+  height:120rpx;
+  box-sizing:border-box;
+  background-color:#fff;
+  box-shadow:0 0 36rpx rgba(0,0,0,0.12);
+}
+.fixed_top{
+  top:0;
+}
+.fixed_bottom{
+  bottom:0;
 }

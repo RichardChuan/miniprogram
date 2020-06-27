@@ -92,7 +92,7 @@
     </view>
   </view>
 </view>
-<view class="fixed flex ai jc">
+<view class="fixed fixed_bottom flex ai jc">
   <view class="flex_item" wx:if="{{IsDisabled}}">
     <view class="btn btn_hollow" bind:tap="onEdit">修改</view>
   </view>
