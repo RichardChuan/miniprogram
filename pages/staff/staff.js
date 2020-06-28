@@ -133,6 +133,7 @@ Page({
     })
   },
   getUploadImg(res){
+    let _this = this;
     let tempFilePaths = res.tempFilePaths;
     console.log(tempFilePaths[0]);
     let Authorization = wx.getStorageSync('Authorization');
@@ -148,8 +149,6 @@ Page({
       },
       success(res){
         let data = JSON.parse(res.data);
-        console.log(data);
-        console.log(data.Files[0].Id);
         utils.request({
           url:'/api/app/idCardRecord/idRecord',
           method:'post',
@@ -157,18 +156,30 @@ Page({
             'FileId':data.Files[0].Id
           },
           success(res){
-            console.log(res);
+            _this.setData({
+              Tips:{
+                type:'success',
+                msg:'上传成功'
+              }
+            })
           },
           fail(err){
-            console.log(err);
+            _this.setData({
+              Tips:{
+                type:'error',
+                msg:'上传失败，请重试'
+              }
+            })
           }
         })
-
-        // res.data
-        // console.log(res.data);
       },
       fail(err){
-        console.log(err);
+        _this.setData({
+          Tips:{
+            type:'error',
+            msg:'上传失败，请重试'
+          }
+        })
       }
     })
   }

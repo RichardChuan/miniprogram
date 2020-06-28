@@ -60,11 +60,5 @@ App({
       });
       return true;
     }
-  },
-  checkPhone(e){
-    return /^1[3456789]\d{9}$/.test(e);
-    // if(!()){ 
-    //   utils.toast({title:'手机号有误'});
-    // }
   }
 })

@@ -105,7 +105,6 @@ Page({
   // [查看]按钮
   onTap(e){
     let index = e.currentTarget.dataset.index;
-    console.log(index);
     let info = JSON.stringify(this.data.Lists[index]);
     wx.navigateTo({
       url:'/pages/staffEdit/staffEdit?info='+info,
@@ -149,5 +148,5 @@ Page({
       status:0,
       searchData:_this.data.searchData
     });
-  },
+  }
 })

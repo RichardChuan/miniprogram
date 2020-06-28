@@ -1,12 +1,12 @@
 page{
-  padding-bottom:32rpx;
+  padding-bottom:1px;
 }
 .banner{
   position:relative;
   width:750rpx;
   height:480rpx;
   overflow:hidden;
-  margin-bottom:-120rpx;
+  margin-bottom:-144rpx;
 }
 .image{
   position:absolute;

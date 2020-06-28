@@ -25,36 +25,21 @@ Page({
     // 民族字典
     NationType:[],
     // 民族默认选项索引
-    NationIndex:12,
+    NationIndex:0,
   },
   onLoad(e){
-
-
-
-      app.onInitData({
-        key:'CardType',
-        url:'/api/app/dictItem/cardType'
-      })
-      .then(()=>{
-          app.onInitData({
-            key:'NationType',
-            url:'/api/app/dictItem/nationType'
-          })
-          .then(()=>{
-              app.onInitData({
-                key:'WorkType',
-                url:'/api/app/dictItem/workType'
-              })
-              .then(()=>{
-
-
-
-
-    
     let _this = this;
     let idCard = e.idCard?JSON.parse(e.idCard):{};
-    let NationIndex = 12;
+    let NationIndex;
     let NationType = app.globalData.NationType;
+    NationType.map(function(e,i){
+      if(e.DictName.indexOf('汉')>=0){
+        NationIndex = i
+        _this.setData({
+          NationIndex
+        })
+      }
+    })
     let CardIndex = 0;
     let CardType = app.globalData.CardType;
     let IsDisabled;
@@ -85,15 +70,6 @@ Page({
       NationType,
       CardType
     })
-
-
-
-})
-})
-})
-
-
-
   },
   // 修改表单的值
   onChange(e){
@@ -136,6 +112,7 @@ Page({
       }
     })
     .then(()=>{
+      console.log(1);
       wx.hideLoading();
       _this.setData({
         Tips:{
@@ -150,6 +127,7 @@ Page({
       },2000)
     })
     .catch((err)=>{
+      console.log(2);
       wx.hideLoading();
       _this.setData({
         Tips:{

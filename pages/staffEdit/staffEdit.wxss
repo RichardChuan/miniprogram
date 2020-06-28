@@ -9,15 +9,17 @@
   height:96rpx;
   line-height:96rpx;
 }
+.list_top{
+  color:#666;
+}
+.list_top span{
+  margin-right:16rpx;
+}
+.list_top span:first-child{
+  font-size:48rpx;
+  color:#333;
+}
+
 .footer{
   height:120rpx;
-}
-.btn{
-  margin:0 32rpx;
-  height:90rpx;
-  border:1px solid #3b77e3;
-  line-height:calc(90rpx);
-  border-radius:16rpx;
-  font-size:36rpx;
-  text-align:center;
 }

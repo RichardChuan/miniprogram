@@ -11,7 +11,7 @@ let icmtenant = '';
  */
 function isHttpSuccess(status){
   // return (status >= 200 && status < 300)|| status == 304;
-  return status >= 200 || status < 300;
+  return status >= 200 && status < 300;
   // return status < 500;
 }
 

@@ -55,6 +55,15 @@
   font-size:28rpx;
   border-radius:8rpx;
 }
+.btn_default{
+  box-sizing:content-box;
+  height:90rpx;
+  line-height:90rpx;
+  margin:0 32rpx;
+  border-radius:16rpx;
+  font-size:36rpx;
+  text-align:center;
+}
 .btn_solid,.btn_hollow{
   border:1px solid #3b77e3;
   text-align:center;

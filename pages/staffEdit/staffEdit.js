@@ -15,6 +15,10 @@ Page({
     Sex:'M',
     // 民族
     NationText:'',
+    // 民族默认选项索引
+    NationIndex:0,
+    // 民族字典
+    NationType:[],
     // 住址
     Address:'',
     // 身份证号
@@ -37,7 +41,6 @@ Page({
   onLoad(e){
     let _this = this;
     let info = e.info?JSON.parse(e.info):'';
-    console.log(info);
     _this.setData(info);
     if(info.Phone==''){
       _this.setData({
@@ -46,12 +49,19 @@ Page({
     }
     let WorkIndex = 0;
     let WorkType = app.globalData.WorkType;
+    let NationIndex = 0;
+    let NationType = app.globalData.NationType;
     WorkType.map(function(e,i){
       if(info.WorkCode == e.DictCode) WorkIndex = i;
     })
+    NationType.map(function(e,i){
+      if(e.DictName.indexOf(info.NationText)>=0) NationIndex = i;
+    })
     _this.setData({
       WorkType,
-      WorkIndex
+      WorkIndex,
+      NationType,
+      NationIndex,
     })
   },
   // 修改表单的值
@@ -72,6 +82,7 @@ Page({
     wx.showLoading({
       title: '请稍后',
     });
+    console.log(_this.data);
     utils.request({
       url:'/api/app/employee/fromBe',
       method:'put',
@@ -82,8 +93,9 @@ Page({
         Address:_this.data.Address,
         Phone:_this.data.Phone,
         WorkType:_this.data.WorkType[_this.data.WorkIndex].Id,
-        IsSafetyTraining:_this.data.IsSafetyTraining==true?true:false,
-        IsRecord:_this.data.IsRecord==true?true:false,
+        NationType:_this.data.NationType[_this.data.NationIndex].Id,
+        IsSafetyTraining:_this.data.IsSafetyTraining?true:false,
+        IsRecord:_this.data.IsRecord?true:false,
         WorkCertificateCode:_this.data.WorkCertificateCode,
         ContractCode:_this.data.ContractCode,
         Remark:_this.data.Remark,
@@ -117,11 +129,11 @@ Page({
   onPageBack(data){
     let pages = getCurrentPages();
     let prevPage = pages[pages.length-2];
-    let dataLists = prevPage.__data__.dataLists;
-    dataLists.map((e,i)=>{
-      if(e.Id == data.Id) dataLists[i] = data;
+    let Lists = prevPage.__data__.Lists;
+    Lists.map((e,i)=>{
+      if(e.Id == data.Id) Lists[i] = data;
     })
-    prevPage.setData({dataLists});
+    prevPage.setData({Lists});
   },
   onPhoneCall(){
     let Phone = this.data.Phone;
