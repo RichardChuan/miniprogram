@@ -1,10 +1,12 @@
+page{
+  padding-bottom:32rpx;
+}
 .banner{
   position:relative;
   width:750rpx;
   height:480rpx;
   overflow:hidden;
   margin-bottom:-120rpx;
-  text-align:center;
 }
 .image{
   position:absolute;
@@ -14,16 +16,24 @@
   width:100%;
   filter:blur(5rpx);
 }
+
+.title,.sub_title{
+  text-align:center;
+}
 .title{
+  margin-top:128rpx;
+}
+.sub_title{
+  margin-top:16rpx;
+}
+.title span{
   display:inline-block;
-  margin-top:140rpx;
   padding:16rpx 32rpx;
   font-size:48rpx;
   background-color:rgba(255,255,255,0.5);
 }
-.sub_title{
+.sub_title span{
   display:inline-block;
-  margin-top:16rpx;
   padding:8rpx 16rpx;
   font-size:28rpx;
   background-color:rgb(255,204,112);
