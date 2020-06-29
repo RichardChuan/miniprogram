@@ -1,4 +1,4 @@
-<block wx:for="{{listItem}}" wx:key="index">
+<block wx:for="{{menuItem}}" wx:key="index">
   <menu-item 
   img="{{item.img}}"
   title="{{item.title}}"

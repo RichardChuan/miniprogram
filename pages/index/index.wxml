@@ -3,7 +3,7 @@
   <view class="sub_title"><span>群防群治 齐心协力</span></view>
   <image class="image" src="/images/index.jpg" mode="aspectFill" lazy-load="false"></image>
 </view>
-<block wx:for="{{listItem}}" wx:key="index">
+<block wx:for="{{menuItem}}" wx:key="index">
   <menu-item 
   img="{{item.img}}"
   title="{{item.title}}"

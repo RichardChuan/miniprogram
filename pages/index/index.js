@@ -2,7 +2,7 @@ const app = getApp();
 const utils = require('../../utils/utils');
 Page({
   data:{
-    listItem:[
+    menuItem:[
       {
         img:'/images/icon/ico-CAD.png',
         title:'CAD看图',

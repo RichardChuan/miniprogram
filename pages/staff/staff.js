@@ -7,7 +7,7 @@ Page({
       type:'',
       msg:''
     },
-    listItem:[
+    menuItem:[
       {
         img:'/images/icon/ico-scan.png',
         title:'OCR识别',
