@@ -82,7 +82,6 @@ Page({
     wx.showLoading({
       title: '请稍后',
     });
-    console.log(_this.data);
     utils.request({
       url:'/api/app/employee/fromBe',
       method:'put',
@@ -94,8 +93,8 @@ Page({
         Phone:_this.data.Phone,
         WorkType:_this.data.WorkType[_this.data.WorkIndex].Id,
         NationType:_this.data.NationType[_this.data.NationIndex].Id,
-        IsSafetyTraining:_this.data.IsSafetyTraining?true:false,
-        IsRecord:_this.data.IsRecord?true:false,
+        IsSafetyTraining:_this.data.IsSafetyTraining==true?true:false,
+        IsRecord:_this.data.IsRecord==true?true:false,
         WorkCertificateCode:_this.data.WorkCertificateCode,
         ContractCode:_this.data.ContractCode,
         Remark:_this.data.Remark,
@@ -110,11 +109,6 @@ Page({
         }
       })
       _this.onPageBack(res);
-      setTimeout(()=>{
-        wx.navigateBack({
-          delta: 1
-        });
-      },2000)
     })
     .catch((err)=>{
       wx.hideLoading();

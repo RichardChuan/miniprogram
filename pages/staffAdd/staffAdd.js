@@ -112,7 +112,6 @@ Page({
       }
     })
     .then(()=>{
-      console.log(1);
       wx.hideLoading();
       _this.setData({
         Tips:{
@@ -127,7 +126,6 @@ Page({
       },2000)
     })
     .catch((err)=>{
-      console.log(2);
       wx.hideLoading();
       _this.setData({
         Tips:{

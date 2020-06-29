@@ -122,7 +122,6 @@ Page({
   onChange(e){
     let _this = this;
     let value = e.detail.value;
-    console.log(value);
     let searchData = {
       key:'',
       value:'',

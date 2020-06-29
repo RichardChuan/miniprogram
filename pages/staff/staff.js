@@ -135,7 +135,6 @@ Page({
   getUploadImg(res){
     let _this = this;
     let tempFilePaths = res.tempFilePaths;
-    console.log(tempFilePaths[0]);
     let Authorization = wx.getStorageSync('Authorization');
     let icmtenant = wx.getStorageSync('icmtenant');
     wx.uploadFile({
