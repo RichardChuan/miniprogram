@@ -6,7 +6,7 @@
     </view>
     <view class="my_item mar32">
       <button
-        class="btn btn_hollow"
+        class="btn_default btn_hollow"
         hover-class="btn_hollow_hover"
         bind:tap="onSignOut"
         style="width:100%;"
@@ -38,13 +38,16 @@
       </view>
       <view class="my_item mar32">
         <button
-          class="btn btn_solid"
+          class="btn_default btn_solid"
           hover-class="btn_solid_hover"
           form-type="submit"
           style="width:100%;"
         >登录</button>
       </view>
     </form>
+    <view class="my_notice">
+      此小程序仅为企业内部员工使用，请凭用户账号和密码登录
+    </view>
   </block>
 </view>
 

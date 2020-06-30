@@ -59,7 +59,7 @@ Page({
     }
   },
   onTap(e){
-    app.getLogin();
+    if(app.getLogin()) return false;
     let _this = this;
     let type = e.currentTarget.dataset.type;
     let attr = e.currentTarget.dataset.attr;

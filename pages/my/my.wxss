@@ -16,21 +16,6 @@
   display:inline-block;
   width:100%;
 }
-.my_item input{
-  height:96rpx;
-  line-height:96rpx;
-  padding:0 32rpx;
-  font-size:32rpx;
-}
-.btn{
-  height:96rpx;
-  line-height:calc(96rpx - 2px);
-  margin:32rpx;
-  padding:0;
-  border-radius:24rpx;
-  font-size:36rpx;
-  box-shadow:0rpx 2rpx 30rpx 0rpx rgba(0,0,0,0.1);
-}
 
 .viewBtn{
   display:-webkit-flex;
@@ -45,4 +30,13 @@
 .viewBtn image{
   width:42rpx;
   height:42rpx;
+}
+
+.my_notice{
+  position:absolute;
+  bottom:32rpx;
+  width:100%;
+  font-size:24rpx;
+  color:#bfbfbf;
+  text-align:center;
 }
