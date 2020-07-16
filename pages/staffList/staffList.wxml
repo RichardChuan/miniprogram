@@ -1,26 +1,22 @@
 <view class="header">
   <view class="fixed fixed_top flex ai pad32">
-  <input
-    class="flex_item bd_radius"
-    value="{{searchData.value}}"
-    type="text"
-    placeholder="可输入姓名或手机号搜索"
-    maxlength="11"
-    bindinput="onChange"
-  ></input>
-  <button
-    class="btn_mini btn_solid"
-    bind:tap="onSearch"
-    disabled="{{searchData.isDisabled}}"
-  >搜索</button>
-</view>
+    <input class="flex_item bd_radius" value="{{searchData.value}}" type="text" placeholder="可输入姓名或手机号搜索" maxlength="11" bindinput="onChange"></input>
+    <button class="btn_mini btn_solid" bind:tap="onSearch" disabled="{{searchData.isDisabled}}">
+      搜索
+    </button>
+  </view>
 </view>
 <view class="list">
   <view class="list_item flex ai {{item.IsOver?'IsOver':''}}" wx:for="{{Lists}}" wx:key="index">
-    <view class="btn_mini {{item.IsCompletion?'btn_yes':'btn_no'}}">{{item.IsCompletion?'信息完整':'信息不全'}}</view>
+    <view class="btn_mini {{item.IsCompletion?'btn_yes':'btn_no'}}">
+      {{item.IsCompletion?'信息完整':'信息不全'}}
+    </view>
     <view class="flex_item">{{item.Name}}</view>
     <view class="btn_mini btn_hollow" bind:tap="onPhoneCall" data-index="{{index}}">联系Ta</view>
     <view class="btn_mini btn_solid" bind:tap="onTap" data-index="{{index}}">查看</view>
   </view>
 </view>
-<view class="footer_item" wx:if="{{isBottom}}"><view class="hr"></view><view class="footer_item_text">没有更多了</view></view>
+<view class="footer_item" wx:if="{{isBottom}}">
+  <view class="hr"></view>
+  <view class="footer_item_text">没有更多了</view>
+</view>

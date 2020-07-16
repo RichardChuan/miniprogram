@@ -1,0 +1,21 @@
+.feedback_box{
+  position:relative;
+  z-index:0;
+}
+.feedback_notice{
+  position:absolute;
+  bottom:32rpx;
+  right:32rpx;
+  font-size:24rpx;
+  color:#858585;
+}
+.feedback_textarea{
+  width:auto;
+  height:500rpx;
+  padding:16rpx;
+  border:1px solid #ebeef5;
+}
+
+.footer{
+  height:120rpx;
+}

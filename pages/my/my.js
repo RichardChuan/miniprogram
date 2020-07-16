@@ -97,19 +97,20 @@ Page({
         icon:'success',
         duration:2000
       })
+      .then(()=>{
+        _this.getUserInfo();
+        wx.switchTab({
+          url:'/pages/index/index',
+        });
+      });
       wx.showTabBar();
     })
-    .catch(()=>{
+    .catch((err)=>{
+      console.log(err);
       utils.toast({
-        title:'账号名密码错误,请重试'
+        title:err.Error.Message
       })
     })
-    .then(()=>{
-      _this.getUserInfo();
-      wx.switchTab({
-        url:'/pages/index/index',
-      });
-    });
   },
   onSignOut(){
     var _this = this;

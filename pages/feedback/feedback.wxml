@@ -1,0 +1,13 @@
+<view class="feedback_box mar32">
+  <textarea class="feedback_textarea bd_radius" placeholder="请填写具体内容帮助我们了解您的意见与建议" maxlength="200" bindinput="onChange"></textarea>
+  <view class="feedback_notice">{{num}}/200</view>
+</view>
+
+<view class="footer">
+  <view class="fixed fixed_bottom flex ai">
+    <view class="flex_item">
+      <view class="btn_default btn_solid" hover-class="btn_solid_hover" bind:tap="onSubmit">提交</view>
+    </view>
+  </view>
+</view>
+<!-- <button class="btn_default btn_solid" open-type="contact" style="width:auto;margin:32rpx">在线客服</button> -->

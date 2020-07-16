@@ -26,7 +26,8 @@ Page({
         img:'/images/icon/ico-prop.png',
         title:'建议反馈',
         note:'致力于为您提供高效、便捷的互联网服务。若有任何宝贵意见，请留言',
-        type:'toast'
+        type:'route',
+        attr:'/pages/feedback/feedback'
       }
     ]
   },

@@ -1,138 +1,141 @@
 const app = getApp();
-const utils = require('../../utils/utils');
-let oper = '';
+const utils = require("../../utils/utils");
+let oper = "";
 Page({
   data: {
     // 是否可用
-    IsDisabled:false,
+    IsDisabled: false,
     // 提示信息
-    Tips:{
-      type:'',
-      msg:''
+    Tips: {
+      type: "",
+      msg: "",
     },
     // 姓名
-    Name:'',
+    Name: "",
     // 性别
-    Sex:'M',
+    Sex: "M",
     // 住址
-    Address:'',
+    Address: "",
     // 身份证号
-    CardCode:'',
+    CardCode: "",
     // 证件类型字典
-    CardType:[],
+    CardType: [],
     // 证件类型默认选项索引
-    CardIndex:0,
+    CardIndex: 0,
     // 民族字典
-    NationType:[],
+    NationType: [],
     // 民族默认选项索引
-    NationIndex:0,
+    NationIndex: 0,
   },
-  onLoad(e){
+  onLoad(e) {
     let _this = this;
-    let idCard = e.idCard?JSON.parse(e.idCard):{};
+    let idCard = e.idCard ? JSON.parse(e.idCard) : {};
     let NationIndex;
     let NationType = app.globalData.NationType;
-    NationType.map(function(e,i){
-      if(e.DictName.indexOf('汉')>=0){
-        NationIndex = i
+    NationType.map(function (e, i) {
+      if (e.DictName.indexOf("汉") >= 0) {
+        NationIndex = i;
         _this.setData({
-          NationIndex
-        })
+          NationIndex,
+        });
       }
-    })
+    });
     let CardIndex = 0;
     let CardType = app.globalData.CardType;
     let IsDisabled;
-    if(Object.keys(idCard).length != 0){
-      NationType.map(function(e,i){
-        if(e.DictName.indexOf(idCard.nationality.text) != -1) NationIndex = i;
-      })
-      IsDisabled=true;
-    }else{
+    if (Object.keys(idCard).length != 0) {
+      NationType.map(function (e, i) {
+        if (e.DictName.indexOf(idCard.nationality.text) != -1) NationIndex = i;
+      });
+      IsDisabled = true;
+    } else {
       idCard.name = {};
       idCard.gender = {};
       idCard.address = {};
       idCard.id = {};
-      idCard.name.text='';
-      idCard.gender.text='男';
-      idCard.address.text='';
-      idCard.id.text='';
-      IsDisabled=false;
+      idCard.name.text = "";
+      idCard.gender.text = "男";
+      idCard.address.text = "";
+      idCard.id.text = "";
+      IsDisabled = false;
     }
     _this.setData({
-      Name:idCard.name.text,
-      Sex:idCard.gender.text=='男'?'M':'F',
-      Address:idCard.address.text,
-      CardCode:idCard.id.text,
-      IsDisabled:IsDisabled,
+      Name: idCard.name.text,
+      Sex: idCard.gender.text == "男" ? "M" : "F",
+      Address: idCard.address.text,
+      CardCode: idCard.id.text,
+      IsDisabled: IsDisabled,
       NationIndex,
       CardIndex,
       NationType,
-      CardType
-    })
+      CardType,
+    });
   },
   // 修改表单的值
-  onChange(e){
+  onChange(e) {
     let target = e.currentTarget.dataset.target;
     let value = e.detail.value;
     this.setData({
-      [target]:value
-    })
+      [target]: value,
+    });
   },
-  onEdit(){
+  onEdit() {
     this.setData({
-      IsDisabled:false
-    })
+      IsDisabled: false,
+    });
   },
   // 添加数据
-  onSubmit(){
+  onSubmit() {
     let _this = this;
-    if(!_this.data.Name || !_this.data.CardCode || !_this.data.Address){
+    if (!_this.data.Name || !_this.data.CardCode || !_this.data.Address) {
       _this.setData({
-        Tips:{
-          type:'error',
-          msg:'身份信息不全，请填写'
-        }
-      })
+        Tips: {
+          type: "error",
+          msg: "身份信息不全，请填写",
+        },
+      });
       return false;
     }
     wx.showLoading({
-      title: '请稍后',
+      title: "请稍后",
     });
-    utils.request({
-      url:'/api/app/employee',
-      method:'post',
-      data:{
-        Name:_this.data.Name,
-        Sex:_this.data.Sex,
-        NationType:_this.data.NationType[_this.data.NationIndex].Id,
-        CardType:_this.data.CardType[_this.data.CardIndex].Id,
-        CardCode:_this.data.CardCode,
-        Address:_this.data.Address
-      }
-    })
-    .then(()=>{
-      wx.hideLoading();
-      _this.setData({
-        Tips:{
-          type:'success',
-          msg:'添加成功'
-        }
+    utils
+      .request({
+        url: "/api/app/employee",
+        method: "post",
+        data: {
+          Name: _this.data.Name,
+          Sex: _this.data.Sex,
+          NationType: _this.data.NationType[_this.data.NationIndex].Id,
+          CardType: _this.data.CardType[_this.data.CardIndex].Id,
+          CardCode: _this.data.CardCode,
+          Address: _this.data.Address,
+        },
       })
-      setTimeout(()=>{
-        wx.redirectTo({
-          url:'/pages/staff/staff',
+      .then((res) => {
+        console.log(res);
+        wx.hideLoading();
+        _this.setData({
+          Tips: {
+            type: "success",
+            msg: "添加成功",
+          },
         });
-      },2000)
-    })
-    .catch((err)=>{
-      wx.hideLoading();
-      _this.setData({
-        Tips:{
-          type:'error',
-          msg:err.data.Error.Message
-        }
+        setTimeout(() => {
+          wx.redirectTo({
+            url: "/pages/staff/staff",
+          });
+        }, 2000);
       })
-    })
-  }
-})
+      .catch((err) => {
+        console.log(err);
+        wx.hideLoading();
+        _this.setData({
+          Tips: {
+            type: "error",
+            msg: err.Error.Message,
+          },
+        });
+      });
+  },
+});

@@ -68,16 +68,16 @@ function requestP(options = {}){
           resolve(res.data);
         }else{
           if(fail){
-            fail(res);
+            fail(res.data);
           }
-          reject(res);
+          reject(res.data);
         }
       },
       fail(err){
         if(fail){
-          fail(err);
+          fail(err.data);
         }
-        reject(err);
+        reject(err.data);
       },
       complete,
     });

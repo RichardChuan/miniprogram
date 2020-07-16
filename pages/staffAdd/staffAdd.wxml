@@ -76,6 +76,7 @@
         data-target="CardCode"
         placeholder="请输入证件号码"
         disabled="{{IsDisabled}}"
+        maxlength="18"
       ></input>
     </view>
   </view>
