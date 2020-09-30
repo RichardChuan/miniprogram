@@ -1,11 +1,16 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/my/my",
     "pages/staff/staff",
     "pages/staffAdd/staffAdd",
     "pages/staffEdit/staffEdit",
     "pages/staffList/staffList",
-    "pages/my/my",
+    "pages/form/form",
+    "pages/formWork/formWork",
+    "pages/formWorkAdd/formWorkAdd",
+    "pages/formWorkList/formWorkList",
+    "pages/project/project",
     "pages/feedback/feedback"
   ],
   "window": {

@@ -1,4 +1,3 @@
 <block wx:for="{{menuItem}}" wx:key="index">
   <menu-item img="{{item.img}}" title="{{item.title}}" note="{{item.note}}" data-type="{{item.type}}" data-attr="{{item.attr}}" bind:onTap="onTap"></menu-item>
 </block>
-<toptips type="{{Tips.type}}" show="{{Tips.msg}}" msg="{{Tips.msg}}" delay="2000"></toptips>

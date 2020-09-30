@@ -20,7 +20,15 @@ Page({
         img:'/images/icon/ico-cale.png',
         title:'工程计量表',
         note:'简化提交工程数据步骤，实现自动化，快速成表格',
-        type:'toast'
+        type:'route',
+        attr:'/pages/form/form'
+      },
+      {
+        img:'/images/icon/ico-cale.png',
+        title:'工程项目',
+        note:'精准记录项目记录，并随时查看把控项目进度',
+        type:'route',
+        attr:'/pages/project/project'
       },
       {
         img:'/images/icon/ico-prop.png',

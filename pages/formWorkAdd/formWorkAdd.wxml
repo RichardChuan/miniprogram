@@ -1,0 +1,82 @@
+<view class="list">
+  <view class="list_item flex">
+    <view class="item_title">工程名称：</view>
+    <view class="item_content flex_item">
+      <input type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">工程部位：</view>
+    <view class="item_content flex_item">
+      <input type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">劳务分包方：</view>
+    <view class="item_content flex_item">
+      <picker value="{{NationIndex}}" bindchange="onChange" data-target="NationIndex" range="{{NationType}}" range-key="DictName" disabled="{{IsDisabled}}">
+        <view>{{NationType[NationIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">负责人：</view>
+    <view class="item_content flex_item">
+      <picker value="{{NationIndex}}" bindchange="onChange" data-target="NationIndex" range="{{NationType}}" range-key="DictName" disabled="{{IsDisabled}}">
+        <view>{{NationType[NationIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">发生时间：</view>
+    <view class="item_content flex_item">
+      <input type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">作业人数：</view>
+    <view class="item_content flex_item">
+      <picker value="{{NationIndex}}" bindchange="onChange" data-target="NationIndex" range="{{NationType}}" range-key="DictName" disabled="{{IsDisabled}}">
+        <view>{{NationType[NationIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">定额用工数：</view>
+    <view class="item_content flex_item">
+      <input type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">零星用工数：</view>
+    <view class="item_content flex_item">
+      <input type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">计量单位：</view>
+    <view class="item_content flex_item">
+      <picker value="{{NationIndex}}" bindchange="onChange" data-target="NationIndex" range="{{NationType}}" range-key="DictName" disabled="{{IsDisabled}}">
+        <view>{{NationType[NationIndex].DictName}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">工程内容：</view>
+    <view class="item_content flex_item">
+      <input type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></input>
+    </view>
+  </view>
+  <view class="list_item flex">
+    <view class="item_title">原因描述：</view>
+    <view class="item_content flex_item">
+      <textarea type="text" value="{{Name}}" bindinput="onChange" data-target="Name" placeholder="请输入姓名" disabled="{{IsDisabled}}"></textarea>
+    </view>
+  </view>
+</view>
+<view class="fixed fixed_bottom flex ai jc">
+  <view class="flex_item">
+    <view class="btn_default btn_solid" bind:tap="onSubmit">提交</view>
+  </view>
+</view>
+<toptips type="{{Tips.type}}" show="{{Tips.msg}}" msg="{{Tips.msg}}" delay="2000"></toptips>

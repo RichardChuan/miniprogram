@@ -1,0 +1,14 @@
+.list {
+  padding: 32rpx;
+  font-size: 32rpx;
+}
+.list_item {
+  margin-bottom: 32rpx;
+}
+.item_title {
+  height: 96rpx;
+  line-height: 96rpx;
+}
+.footer {
+  height: 120rpx;
+}
